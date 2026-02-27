@@ -1,59 +1,51 @@
-import { useEffect, useState } from "react";
+import React from 'react';
 import { connect } from 'react-redux';
 import { likeSong, unlikeSong, setSongDetails } from '../../actions/songActions';
-import TextBoldL from '../text/text-bold-l';
-import TextRegularM from '../text/text-regular-m';
+import * as Icons from '../icons';
+import styles from './song-card-m.module.css';
 
-import styles from "./song-card-m.module.css";
-
-function SongCardM(props) {
-  const [isLiked, setIsLiked] = useState(false);
-
-  useEffect(() => {
-    setIsLiked(props.likedSongIds.has(props.data.index));
-  }, [props.data.index, props.likedSongIds]);
-
-  const handleLike = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+function SongCardM({ cardData, likedSongs, likeSong, unlikeSong, setSongDetails }) {
     
-    if (isLiked) {
-      props.unlikeSong(props.data.index);
-    } else {
-      props.likeSong(props.data.index);
-    }
-  };
+    const isLiked = likedSongs.includes(cardData.id);
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    props.setSongDetails(props.data);
-  };
+    const handleLikeToggle = (e) => {
+        e.stopPropagation();
+        if (isLiked) {
+            unlikeSong(cardData.id);
+        } else {
+            likeSong(cardData.id);
+        }
+    };
 
-  return (
-    <div className={styles.SongCardMBox}>
-      <div className={styles.SongCardM} onClick={handleClick}>
-        <div className={styles.ImgBox}>
-          <img src={props.data.songimg} alt={props.data.songName} />
+    const handleOpenModal = () => {
+        setSongDetails(cardData);
+    };
+
+    return (
+        <div className={styles.SongCardMBox}>
+            <div className={styles.SongCardM} onClick={handleOpenModal}>
+                <div className={styles.ImgBox}>
+                    <img src={cardData.coverart} alt={cardData.title} />
+                </div>
+
+                <div className={styles.Title}>
+                    <p>{cardData.title}</p>
+                    <p>{cardData.artist}</p>
+                </div>
+            </div>
+
+            <button 
+                className={`${styles.LikeBtn} ${isLiked ? styles.Liked : ''}`}
+                onClick={handleLikeToggle}
+            >
+                {isLiked ? <Icons.LikeActive /> : <Icons.Like />}
+            </button>
         </div>
-        <div className={styles.Title}>
-          <TextBoldL>{props.data.songName}</TextBoldL>
-          <TextRegularM>{props.data.songArtist}</TextRegularM>
-        </div>
-      </div>
-      <button
-        onClick={handleLike}
-        className={`${styles.LikeBtn} ${isLiked ? styles.Liked : ''}`}
-      >
-        {isLiked ? '❤️' : '🤍'}
-      </button>
-    </div>
-  );
+    );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    likedSongIds: state.songs.likedSongIds,
-  };
-};
+const mapStateToProps = (state) => ({
+    likedSongs: state.songs.likedSongs
+});
 
 export default connect(mapStateToProps, { likeSong, unlikeSong, setSongDetails })(SongCardM);

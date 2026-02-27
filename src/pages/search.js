@@ -1,74 +1,29 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { setSongDetails } from '../actions/songActions';
 import Topnav from '../component/topnav/topnav';
-import TitleM from '../component/text/title-m'
-import SearchPageCard from '../component/cards/searchpage-card';
-import SongCardS from '../component/cards/song-card-s';
-import SongDetailsModal from '../component/modals/song-details-modal';
-import { SEARCHCARDS } from '../data/index';
+import SearchpageCard from '../component/cards/searchpage-card';
+import TitleM from '../component/text/title-m';
+import styles from './search.module.css';
 
-import styles from "./search.module.css";
-
-function Search(props){
-    const [modalOpen, setModalOpen] = useState(false);
-
-    const handleSongSelect = (song) => {
-        props.setSongDetails(song);
-        setModalOpen(true);
-    };
-
-    const hasSearchResults = props.searchResults && props.searchResults.length > 0;
-
+function Search({ searchResults, searchQuery }) {
     return (
         <div className={styles.SearchPage}>
-            <Topnav search={true}/>
-
-            {!hasSearchResults ? (
-                <div className={styles.Search}>
-                    <TitleM>Hepsine göz at</TitleM>
-                    <div className={styles.SearchCardGrid}>
-                        {SEARCHCARDS.map((card) => {
-                            return (
-                                <SearchPageCard 
-                                    key={card.title}
-                                    cardData={{
-                                        bgcolor: card.bgcolor,
-                                        title: card.title,
-                                        imgurl: card.imgurl,
-                                    }}
-                                />
-                            );
-                        })}
-                    </div>
+            <Topnav />
+            <div className={styles.content}>
+                <TitleM>{searchQuery ? `Results for "${searchQuery}"` : "Browse All"}</TitleM>
+                <div className={styles.grid}>
+                    {searchResults.map(song => (
+                        <SearchpageCard key={song.id} cardData={song} />
+                    ))}
                 </div>
-            ) : (
-                <div className={styles.SongSearchResults}>
-                    <TitleM>Şarkı Sonuçları ({props.searchResults.length})</TitleM>
-                    <div className={styles.SongsGrid}>
-                        {props.searchResults.map((song) => (
-                            <div key={song.index} onClick={() => handleSongSelect(song)}>
-                                <SongCardS data={song} />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )}
-
-            <SongDetailsModal 
-                song={props.currentSongDetails}
-                isOpen={modalOpen}
-                onClose={() => setModalOpen(false)}
-            />
+            </div>
         </div>
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        searchResults: state.songs.searchResults,
-        currentSongDetails: state.songs.currentSongDetails,
-    };
-};
+const mapStateToProps = (state) => ({
+    searchResults: state.songs.searchResults,
+    searchQuery: state.songs.searchQuery
+});
 
-export default connect(mapStateToProps, { setSongDetails })(Search);
+export default connect(mapStateToProps)(Search);

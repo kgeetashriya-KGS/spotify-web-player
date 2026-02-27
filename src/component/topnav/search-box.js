@@ -1,46 +1,33 @@
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { searchSongs, fetchSongs } from '../../actions/songActions';
-import { SONGS } from '../../data/songs';
+import { searchSongs } from '../../actions/songActions';
 import * as Icons from '../icons';
 import styles from './search-box.module.css';
 
-function SearchBox(props) {
-    const history = useHistory();
-    const [inputValue, setInputValue] = useState('');
+function SearchBox({ searchSongs }) {
+    const [query, setQuery] = useState('');
 
-    const handleSearchChange = (e) => {
-        const query = e.target.value;
-        setInputValue(query);
-
-        if (query.trim().length > 0) {
-            props.searchSongs(query);
-            history.push('/search');
-        }
-    };
-
-    const handleClear = () => {
-        setInputValue('');
+    const handleSearch = (e) => {
+        const value = e.target.value;
+        setQuery(value);
+        searchSongs(value); // Dispatches to Redux immediately on type
     };
 
     return (
-        <div className={styles.SeachBox}>
-            <Icons.Search />
-            <input 
-                placeholder="Sanatçılar, şarkılar veya podcast'ler" 
+        <div className={styles.searchBox}>
+            <span className={styles.searchIcon}>
+                <Icons.Search />
+            </span>
+            <input
+                type="text"
+                placeholder="Artists, songs, or podcasts"
+                value={query}
+                onChange={handleSearch}
+                className={styles.input}
                 maxLength="80"
-                value={inputValue}
-                onChange={handleSearchChange}
             />
         </div>
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        searchResults: state.songs.searchResults,
-    };
-};
-
-export default connect(mapStateToProps, { searchSongs, fetchSongs })(SearchBox);
+export default connect(null, { searchSongs })(SearchBox);

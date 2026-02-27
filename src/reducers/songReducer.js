@@ -1,97 +1,101 @@
-import {
-  FETCH_SONGS,
-  SEARCH_SONGS,
+import { 
+  FETCH_SONGS, 
+  SEARCH_SONGS, 
   SET_SONG_LOADING,
   SET_SONG_ERROR,
   CLEAR_SONG_ERROR,
-  LIKE_SONG,
-  UNLIKE_SONG,
-  FETCH_LIKED_SONGS,
-  SET_SONG_DETAILS,
-} from "../actions/songActions";
+  LIKE_SONG, 
+  UNLIKE_SONG, 
+  SET_SONG_DETAILS 
+} from '../actions/songActions';
 
-const INITIAL_SONG_STATE = {
-  allSongs: [],
-  searchResults: [],
-  likedSongs: [],
-  likedSongIds: new Set(),
-  currentSongDetails: null,
+// --- Dummy Songs ---
+const dummySongs = [
+  { id: '1', title: 'Bohemian Rhapsody', artist: 'Queen', album: 'A Night at the Opera', coverart: 'https://via.placeholder.com/150' },
+  { id: '2', title: 'Blinding Lights', artist: 'The Weeknd', album: 'After Hours', coverart: 'https://via.placeholder.com/150/0000FF/808080' },
+  { id: '3', title: 'Shape of You', artist: 'Ed Sheeran', album: 'Divide', coverart: 'https://via.placeholder.com/150/FF0000/FFFFFF' }
+];
+
+const initialState = {
+  songs: dummySongs,
+  searchResults: dummySongs,
+  likedSongs: [],              // Stores IDs
+  currentSongDetails: null,    // For modal
   isLoading: false,
   error: null,
+  searchQuery: ''
 };
 
-export const songReducer = (state = INITIAL_SONG_STATE, action) => {
+const songReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_SONGS:
-      return {
-        ...state,
-        allSongs: action.payload,
-        isLoading: false,
-        error: null,
-      };
-
-    case SEARCH_SONGS:
-      const query = action.payload.toLowerCase();
-      const filtered = state.allSongs.filter(
-        (song) =>
-          song.songName.toLowerCase().includes(query) ||
-          song.songArtist.toLowerCase().includes(query)
-      );
-      return {
-        ...state,
-        searchResults: filtered,
-      };
 
     case SET_SONG_LOADING:
       return {
         ...state,
-        isLoading: action.payload,
+        isLoading: action.payload
       };
 
     case SET_SONG_ERROR:
       return {
         ...state,
         error: action.payload,
-        isLoading: false,
+        isLoading: false
       };
 
     case CLEAR_SONG_ERROR:
       return {
         ...state,
-        error: null,
+        error: null
       };
+
+    case FETCH_SONGS:
+      return {
+        ...state,
+        songs: action.payload,
+        searchResults: action.payload,
+        isLoading: false
+      };
+
+    case SEARCH_SONGS: {
+      const query = action.payload;
+      const lowerQuery = query.toLowerCase();
+
+      const filtered = state.songs.filter(song =>
+        song.title?.toLowerCase().includes(lowerQuery) ||
+        song.artist?.toLowerCase().includes(lowerQuery)
+      );
+
+      return {
+        ...state,
+        searchQuery: query,
+        searchResults: filtered
+      };
+    }
 
     case LIKE_SONG:
-      const newLikedIds = new Set(state.likedSongIds);
-      newLikedIds.add(action.payload);
-      return {
-        ...state,
-        likedSongIds: newLikedIds,
-      };
+      if (!state.likedSongs.includes(action.payload)) {
+        return {
+          ...state,
+          likedSongs: [...state.likedSongs, action.payload]
+        };
+      }
+      return state;
 
     case UNLIKE_SONG:
-      const updatedLikedIds = new Set(state.likedSongIds);
-      updatedLikedIds.delete(action.payload);
       return {
         ...state,
-        likedSongIds: updatedLikedIds,
-      };
-
-    case FETCH_LIKED_SONGS:
-      const likedIds = new Set(action.payload.map((song) => song.index));
-      return {
-        ...state,
-        likedSongs: action.payload,
-        likedSongIds: likedIds,
+        likedSongs: state.likedSongs.filter(id => id !== action.payload)
       };
 
     case SET_SONG_DETAILS:
       return {
         ...state,
-        currentSongDetails: action.payload,
+        currentSongDetails: action.payload
       };
 
     default:
       return state;
   }
 };
+
+export default songReducer;

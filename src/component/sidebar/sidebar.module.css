@@ -1,32 +1,56 @@
-.SideNavbar{
-    /*width: var(--sidenav-width);*/
-    background-color: var(--sidenav-black);
-    position: relative;
+.sidebar {
+    width: 240px;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
 }
-.Fixed{
-    position: sticky;
-    top: 0;
-    bottom: 0;
-    padding-top: 24px;
+
+.sidebar img {
+    margin-bottom: 24px;
 }
-.changeWidth{
-    width: 8px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 95px;
-    cursor: col-resize;
-    z-index: 9999;
+
+.userSection {
+    margin-top: auto;
+    padding: 16px;
+    background: #181818;
+    border-radius: 8px;
+    border: 1px solid #282828;
 }
-.ActiveChange{
-    border-right: 1px solid gray;
+
+.userSection p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
 }
-.ActiveChange::before {
-    content: "";
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 999;
+
+.userSection span {
+    font-size: 12px;
+    color: #b3b3b3;
+}
+
+.userSection button {
+    margin-top: 12px;
+}
+.SideNavbar {
+  background-color: #000;
+  height: 100vh;
+  overflow-y: auto;        /* 🔥 enables vertical scroll */
+  overflow-x: hidden;
+  position: relative;
+  scrollbar-width: thin;   /* Firefox */
+}
+.SideNavbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.SideNavbar::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 10px;
+}
+
+.SideNavbar::-webkit-scrollbar-thumb:hover {
+  background: #444;
 }

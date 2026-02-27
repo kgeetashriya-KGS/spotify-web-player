@@ -1,86 +1,38 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { likeSong, unlikeSong } from '../../actions/songActions';
+import { setSongDetails } from '../../actions/songActions';
+import * as Icons from '../icons';
+import styles from './song-details-modal.module.css'; // Assuming this CSS file exists
 
-import styles from './song-details-modal.module.css';
+function SongDetailsModal({ currentSongDetails, setSongDetails }) {
+    // If there is no song selected in Redux, don't render the modal at all
+    if (!currentSongDetails) return null;
 
-function SongDetailsModal(props) {
-  const [isLiked, setIsLiked] = useState(false);
+    const handleClose = () => {
+        setSongDetails(null); // Clears the state, closing the modal
+    };
 
-  const { song, isOpen, onClose } = props;
-
-  useEffect(() => {
-    if (song) {
-      setIsLiked(props.likedSongIds.has(song.index));
-    }
-  }, [song, props.likedSongIds]);
-
-  if (!isOpen || !song) return null;
-
-  const handleLike = () => {
-    if (isLiked) {
-      props.unlikeSong(song.index);
-    } else {
-      props.likeSong(song.index);
-    }
-  };
-
-  return (
-    <div className={styles.ModalOverlay} onClick={onClose}>
-      <div className={styles.ModalContent} onClick={(e) => e.stopPropagation()}>
-        <button className={styles.CloseBtn} onClick={onClose}>✕</button>
-
-        <div className={styles.ModalBody}>
-          <div className={styles.ImgSection}>
-            <img src={song.songimg} alt={song.songName} />
-          </div>
-
-          <div className={styles.InfoSection}>
-            <h2>{song.songName}</h2>
-            <p className={styles.Artist}>{song.songArtist}</p>
-            
-            <div className={styles.Details}>
-              <div className={styles.DetailItem}>
-                <span className={styles.Label}>Album:</span>
-                <span className={styles.Value}>{song.albumTitle}</span>
-              </div>
-              <div className={styles.DetailItem}>
-                <span className={styles.Label}>Duration:</span>
-                <span className={styles.Value}>{formatTime(song.duration)}</span>
-              </div>
-              <div className={styles.DetailItem}>
-                <span className={styles.Label}>Release Date:</span>
-                <span className={styles.Value}>{new Date(song.releaseDate).toLocaleDateString()}</span>
-              </div>
-              <div className={styles.DetailItem}>
-                <span className={styles.Label}>Genre:</span>
-                <span className={styles.Value}>{song.genre}</span>
-              </div>
+    return (
+        <div className={styles.ModalOverlay} onClick={handleClose}>
+            <div className={styles.ModalContent} onClick={e => e.stopPropagation()}>
+                <button className={styles.CloseBtn} onClick={handleClose}>
+                    X
+                </button>
+                <div className={styles.ModalHeader}>
+                    <img src={currentSongDetails.coverart} alt="Cover" className={styles.CoverArt} />
+                    <div className={styles.TextInfo}>
+                        <h2>{currentSongDetails.title}</h2>
+                        <p>{currentSongDetails.artist}</p>
+                        <p className={styles.AlbumText}>{currentSongDetails.album}</p>
+                    </div>
+                </div>
             </div>
-
-            <button
-              onClick={handleLike}
-              className={`${styles.LikeBtn} ${isLiked ? styles.Liked : ''}`}
-            >
-              {isLiked ? '❤️ Liked' : '🤍 Like'}
-            </button>
-          </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
-function formatTime(seconds) {
-  const mins = Math.floor(seconds / 60);
-  const secs = seconds % 60;
-  return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-}
+const mapStateToProps = (state) => ({
+    currentSongDetails: state.songs.currentSongDetails
+});
 
-const mapStateToProps = (state) => {
-  return {
-    likedSongIds: state.songs.likedSongIds,
-  };
-};
-
-export default connect(mapStateToProps, { likeSong, unlikeSong })(SongDetailsModal);
+export default connect(mapStateToProps, { setSongDetails })(SongDetailsModal);

@@ -1,53 +1,19 @@
 .LikedSongsPage {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    background: var(--bg-dark);
+    height: 100%;
+    background: linear-gradient(180deg, #1e1e1e 0%, #121212 100%);
+    overflow-y: auto;
 }
 
-.Content {
-    flex: 1;
-    padding: 40px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
+.content {
+    padding: 120px 40px 40px 40px;
+    color: #ffffff;
 }
 
-.Header {
-    margin-bottom: 40px;
-}
-
-.EmptyState {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 400px;
-    text-align: center;
-    color: rgb(179, 179, 179);
-}
-
-.EmptyState p {
-    margin: 10px 0;
-    font-size: 16px;
-}
-
-.EmptyState p:first-child {
-    font-size: 18px;
-    color: #fff;
-}
-
-.SongsList {
+.songList {
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
     gap: 12px;
-}
-
-.SongItem {
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-.SongItem:hover {
-    transform: translateX(4px);
 }

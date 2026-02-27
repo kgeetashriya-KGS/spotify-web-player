@@ -1,16 +1,33 @@
-import TitleM from '../text/title-m'
+import React from 'react';
+import { connect } from 'react-redux';
+import { likeSong, unlikeSong } from '../../actions/songActions';
+import * as Icons from '../icons';
+import styles from './searchpage-card.module.css';
 
-import styles from "./searchpage-card.module.css";
+function SearchpageCard({ cardData, likedSongs, likeSong, unlikeSong }) {
+    const isLiked = likedSongs.includes(cardData.id);
 
-function SearchPageCard({cardData}){
+    const toggleLike = (e) => {
+        e.stopPropagation();
+        isLiked ? unlikeSong(cardData.id) : likeSong(cardData.id);
+    };
+
     return (
-        <div key={cardData.title} className={styles.SearchCardBox} style={{backgroundColor: `${cardData.bgcolor}`}}>
-            <div className={styles.SearchCard}>
-                <img src={cardData.imgurl} />
-                <TitleM>{cardData.title}</TitleM>
+        <div className={styles.card}>
+            <img src={cardData.coverart} alt={cardData.title} />
+            <div className={styles.details}>
+                <p>{cardData.title}</p>
+                <span>{cardData.artist}</span>
             </div>
+            <button onClick={toggleLike} className={styles.likeBtn}>
+                {isLiked ? <Icons.LikeActive /> : <Icons.Like />}
+            </button>
         </div>
     );
 }
 
-export default SearchPageCard;
+const mapStateToProps = (state) => ({
+    likedSongs: state.songs.likedSongs
+});
+
+export default connect(mapStateToProps, { likeSong, unlikeSong })(SearchpageCard);

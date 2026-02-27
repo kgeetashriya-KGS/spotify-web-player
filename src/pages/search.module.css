@@ -1,70 +1,26 @@
-.SearchPage{
-    background-color: #121212;
-    color: #fff;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-.Search{
-    padding: 0px 32px;
-    padding-bottom: 32px;
-    margin-bottom: 95px;
-}
-.SearchCardGrid{
-    display: grid;
-    grid-gap: 24px;
-    grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
-    padding-top: 16px;
-}
-@media screen and (max-width: 640px) {
-    .Search{
-        padding: 16px;
-        margin-bottom: 180px;
-        margin-top: 24px;
-    }
-    .SearchCardGrid{
-        grid-gap: 16px;
-        grid-template-columns: 1fr 1fr;
-    }
-}
-.SongSearchResults {
-    padding: 40px 20px;
-}
-
-.SongsGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.NoResults {
-    text-align: center;
-    color: rgb(179, 179, 179);
-    padding: 40px;
-    font-size: 16px;
-}
-.SearchInputBox {
-    padding: 20px;
-    background: rgba(29, 185, 84, 0.2);
-}
-
-.SearchInput {
+.SearchPage {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     width: 100%;
-    max-width: 600px;
-    padding: 12px 16px;
-    border: 2px solid #1db954;
-    border-radius: 24px;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    font-size: 16px;
-    outline: none;
+    background: linear-gradient(180deg, #1e1e1e 0%, #121212 100%);
+    overflow-y: auto;
 }
 
-.SearchInput::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+.content {
+    padding: 120px 40px 40px 40px;
+    color: #ffffff;
 }
 
-.SearchInput:focus {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: #1ed760;
+.content h2,
+.content h3,
+.content p {
+    color: #ffffff;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
 }

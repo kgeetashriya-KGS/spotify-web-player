@@ -1,26 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, combineReducers } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import { playerReducer } from "./reducers/index";
-import { authReducer } from "./reducers/authReducer";
-import { songReducer } from "./reducers/songReducer";
+import thunk from "redux-thunk";
+import rootReducer from "./reducers";
 import App from './App';
 
 import './style/index.css';
 
-// Restore auth state from localStorage on app load
 const savedAuth = localStorage.getItem('authState');
 const initialAuthState = savedAuth ? JSON.parse(savedAuth) : undefined;
 
-// Combine all reducers
-const rootReducer = combineReducers({
-  player: playerReducer,
-  auth: (state, action) => authReducer(state || initialAuthState, action),
-  songs: songReducer,
-});
-
-const store = createStore(rootReducer);
+const store = createStore(
+  rootReducer,
+  { auth: initialAuthState },
+  applyMiddleware(thunk)
+);
 
 ReactDOM.render(
   <React.StrictMode>

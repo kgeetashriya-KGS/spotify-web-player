@@ -1,68 +1,46 @@
-.Topnav{
-    position: sticky;
+.Topnav {
+    position: fixed;
     top: 0;
+    left: 240px;
     right: 0;
-    left: 0;
-    height: 60px;
-    z-index: 99;
-    background-color: transparent;
-}
-.Topnav div{
-    padding: 0px 32px;
-    height: 60px;
+    height: 70px;  /* reduced from 80 */
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 32px;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 100;
 }
-.Topnav div div{
-    position: relative;
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    height: auto;
+
+.navigation {
+    display: flex;
+    gap: 12px;
 }
-.Topnav span {
+
+.search {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.authButtons {
     display: flex;
     align-items: center;
 }
-.ProfileBtn{
-    border: none;
-    height: 32px;
-    padding: 0px 16px;
-    border-radius: 16px;
-    background-color: rgba(0,0,0,.7);
+
+.profileBtn {
+    background-color: #000;
+    border: 1px solid #333;
     color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s ease;
 }
-@media screen and (max-width: 640px) {
-    .Topnav{
-        background-color: #121212;
-        height: 50px;
-    }
-    .Topnav div{
-        height: 50px;
-        padding: 0px 16px;
-    }
-    .Topnav div div{
-        position: absolute;
-        left: 0;
-        top: 46px;
-        right: 0;
-        padding: 8px 16px;
-        background: #121212;
-        border-top: 1px solid #333333;
-        border-bottom: 1px solid #333333;
-    }
-    .Topnav div nav{
-        position: absolute;
-        left: 0;
-        top: 46px;
-        right: 0;
-        padding: 8px 16px;
-        background: #121212;
-        border-top: 1px solid #333333;
-        border-bottom: 1px solid #333333;
-        display: grid;
-        grid-template-columns: 128px 106px 98px 94px;
-        overflow-x: scroll;
-    }
+
+.profileBtn:hover {
+    background-color: #1db954;
+    border-color: #1db954;
 }
