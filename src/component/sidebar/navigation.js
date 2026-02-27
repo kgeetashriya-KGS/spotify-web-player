@@ -10,9 +10,9 @@ function Navigation(props) {
   const router = useLocation();
 
   const handleLogout = () => {
-    props.logoutUser();
-    window.location.href = '/login';
-  };
+  props.logoutUser();
+  window.location.reload();
+};
 
   return (
     <div className={styles.navBtns}>

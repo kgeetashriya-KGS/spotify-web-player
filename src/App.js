@@ -42,17 +42,22 @@ function App(props) {
   const size = useWindowSize();
 
   // EMERGENCY BYPASS (still enabled)
-  const isAuthenticated = true;
+  const isAuthenticated = props.auth?.isAuthenticated || false;
 
   return (
     <Router>
-      <div className={styles.layout}>
-        {size.width > CONST.MOBILE_SIZE 
-          ? <Sidebar /> 
-          : <MobileNavigation />
-        }
+      <div className={isAuthenticated ? styles.layout : ''}>
 
-        <Switch>
+  {/* Hide sidebar on login & signup */}
+  {isAuthenticated && (
+    size.width > CONST.MOBILE_SIZE
+      ? <Sidebar />
+      : <MobileNavigation />
+  )}
+
+  <Switch>
+          <Route path="/login" component={Login} />
+  <Route path="/signup" component={Signup} />
           <ProtectedRoute 
             exact 
             path="/" 
@@ -125,8 +130,8 @@ function App(props) {
           </Route>
         </Switch>
 
-        <Footer />
-        <SongDetailsModal />
+        {isAuthenticated && <Footer />}
+{isAuthenticated && <SongDetailsModal />}
       </div>
     </Router>
   );

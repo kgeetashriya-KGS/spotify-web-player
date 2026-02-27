@@ -3,7 +3,7 @@
 ## 📊 Project Information
 
 - **Project Name**: `spotify-web-player`
-- **Generated On**: 2026-02-27 21:20:22 (Asia/Calcutta / GMT+06:30)
+- **Generated On**: 2026-02-27 21:51:24 (Asia/Calcutta / GMT+06:30)
 - **Total Files Processed**: 155
 - **Export Tool**: Easy Whole Project to Single Text File for LLMs v1.1.0
 - **Tool Author**: Jota / José Guilherme Pandolfi
@@ -97,7 +97,7 @@
 │   │   ├── 📁 sidebar/
 │   │   │   ├── 📄 mobile-navigation.js (268 B)
 │   │   │   ├── 📄 mobile-navigation.module.css (220 B)
-│   │   │   ├── 📄 navigation.js (1.79 KB)
+│   │   │   ├── 📄 navigation.js (1.78 KB)
 │   │   │   ├── 📄 navigation.module.css (1.42 KB)
 │   │   │   ├── 📄 playlist-button.js (530 B)
 │   │   │   ├── 📄 playlist-button.module.css (283 B)
@@ -192,7 +192,7 @@
 │   │   ├── 📄 login.module.css (1.2 KB)
 │   │   ├── 📄 profile.module.css (2.77 KB)
 │   │   └── 📄 variables.css (398 B)
-│   ├── 📄 App.js (3.8 KB)
+│   ├── 📄 App.js (4.02 KB)
 │   ├── 📄 index.css (469 B)
 │   └── 📄 index.js (690 B)
 ├── 📄 package-lock.json (927.82 KB)
@@ -3536,15 +3536,15 @@ export default MobileNavigation;
 ### <a id="📄-src-component-sidebar-navigation-js"></a>📄 `src/component/sidebar/navigation.js`
 
 **File Info:**
-- **Size**: 1.79 KB
+- **Size**: 1.78 KB
 - **Extension**: `.js`
 - **Language**: `javascript`
 - **Location**: `src/component/sidebar/navigation.js`
 - **Relative Path**: `src/component/sidebar`
 - **Created**: 2026-02-27 17:58:08 (Asia/Calcutta / GMT+06:30)
-- **Modified**: 2026-02-27 17:58:08 (Asia/Calcutta / GMT+06:30)
-- **MD5**: `aea22490576db087a00feedb00565f9a`
-- **SHA256**: `b633d774920f68b120074e401ae41348fe7caf31fe9b589738381b89874a663d`
+- **Modified**: 2026-02-27 21:39:16 (Asia/Calcutta / GMT+06:30)
+- **MD5**: `19a9b6fa3171b35906efdef070a34f88`
+- **SHA256**: `173f925a9d7931fc886c327a168dd44470f1ef1c4f7ae533f31b0686d20f9321`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -3562,9 +3562,9 @@ function Navigation(props) {
   const router = useLocation();
 
   const handleLogout = () => {
-    props.logoutUser();
-    window.location.href = '/login';
-  };
+  props.logoutUser();
+  window.location.reload();
+};
 
   return (
     <div className={styles.navBtns}>
@@ -8411,15 +8411,15 @@ p{
 ### <a id="📄-src-app-js"></a>📄 `src/App.js`
 
 **File Info:**
-- **Size**: 3.8 KB
+- **Size**: 4.02 KB
 - **Extension**: `.js`
 - **Language**: `javascript`
 - **Location**: `src/App.js`
 - **Relative Path**: `src`
 - **Created**: 2026-02-27 17:58:08 (Asia/Calcutta / GMT+06:30)
-- **Modified**: 2026-02-27 21:05:34 (Asia/Calcutta / GMT+06:30)
-- **MD5**: `5e6bcf1cbdbea85b0ec9b755ba867a74`
-- **SHA256**: `81a0d1530c3809d9f99f68a869f5c5db0e3c996f0d5c6998bc266bc889057857`
+- **Modified**: 2026-02-27 21:51:23 (Asia/Calcutta / GMT+06:30)
+- **MD5**: `6980a04ed680b4e95ff763f755bb6344`
+- **SHA256**: `94bf69c6e0dcd438047e8d546aa3e61a7259cf95b4a90682c020e13f098a5b6a`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -8469,17 +8469,22 @@ function App(props) {
   const size = useWindowSize();
 
   // EMERGENCY BYPASS (still enabled)
-  const isAuthenticated = true;
+  const isAuthenticated = props.auth?.isAuthenticated || false;
 
   return (
     <Router>
-      <div className={styles.layout}>
-        {size.width > CONST.MOBILE_SIZE 
-          ? <Sidebar /> 
-          : <MobileNavigation />
-        }
+      <div className={isAuthenticated ? styles.layout : ''}>
 
-        <Switch>
+  {/* Hide sidebar on login & signup */}
+  {isAuthenticated && (
+    size.width > CONST.MOBILE_SIZE
+      ? <Sidebar />
+      : <MobileNavigation />
+  )}
+
+  <Switch>
+          <Route path="/login" component={Login} />
+  <Route path="/signup" component={Signup} />
           <ProtectedRoute 
             exact 
             path="/" 
@@ -8552,8 +8557,8 @@ function App(props) {
           </Route>
         </Switch>
 
-        <Footer />
-        <SongDetailsModal />
+        {isAuthenticated && <Footer />}
+{isAuthenticated && <SongDetailsModal />}
       </div>
     </Router>
   );
