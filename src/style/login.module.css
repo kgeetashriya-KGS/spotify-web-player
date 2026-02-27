@@ -1,0 +1,75 @@
+.loginContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1db954 0%, #191414 100%);
+}
+
+.loginBox {
+  background: #282828;
+  padding: 40px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.loginBox h1 {
+  text-align: center;
+  color: #1db954;
+  margin-bottom: 30px;
+  font-size: 32px;
+}
+
+.loginBox form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.loginBox input {
+  padding: 12px;
+  background: #404040;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.loginBox input::placeholder {
+  color: #b3b3b3;
+}
+
+.loginBox button {
+  padding: 12px;
+  background: #1db954;
+  border: none;
+  border-radius: 5px;
+  color: #000;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.loginBox button:hover {
+  background: #1ed760;
+}
+
+.loginBox p {
+  text-align: center;
+  color: #b3b3b3;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.loginBox a {
+  color: #1db954;
+  text-decoration: none;
+}
+
+.loginBox a:hover {
+  text-decoration: underline;
+}

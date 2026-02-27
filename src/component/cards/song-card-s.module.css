@@ -1,0 +1,77 @@
+.SongCardSBox {
+    position: relative;
+    overflow: hidden;
+}
+
+.SongCardS {
+    position: relative;
+    padding: 16px;
+    background: #181818;
+    border-radius: 4px;
+    -webkit-transition: background-color .3s ease;
+    transition: background-color .3s ease;
+    cursor: pointer;
+}
+
+.SongCardS:hover {
+    background-color: #282828;
+}
+
+.ImgBox {
+    position: relative;
+    -webkit-box-shadow: 0 -4px 12px rgb(0 0 0 / 50%);
+    box-shadow: 0 -4px 12px rgb(0 0 0 / 50%);
+    margin-bottom: 12px;
+}
+
+.ImgBox img {
+    height: 100%;
+    width: 100%;
+    border-radius: 2px;
+}
+
+.Title {
+    margin-top: 8px;
+    min-height: 50px;
+}
+
+.Title p {
+    margin: 0px;
+    color: var(--text-white);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.Title p:last-child {
+    color: rgb(179, 179, 179);
+    margin-top: 4px;
+    font-size: 13px;
+}
+
+.LikeBtn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px;
+    transition: transform 0.2s;
+    z-index: 10;
+}
+
+.LikeBtn:hover {
+    transform: scale(1.1);
+}
+
+.LikeBtn.Liked {
+    animation: pulse 0.3s;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}

@@ -24,7 +24,7 @@ function PlaylistPage(props) {
 
 	useEffect(() => {
 		setIsthisPlay(playlistIndex === props.trackData.trackKey[0])
-	})
+	}, [playlistIndex, props.trackData.trackKey])
 
 	return (
 		<div className={styles.PlaylistPage}>
@@ -35,62 +35,61 @@ function PlaylistPage(props) {
 			<Topnav />
 
 			{PLAYLIST.map((item) => {
-                if(item.link == path){
+                if(item.link === path){
                     return (
                         <div key={item.title} onLoad={() => {
-							changeBg(item.playlistBg);
-							setPlaylistIndex(PLAYLIST.indexOf(item))
-						}}>
+	 					changeBg(item.playlistBg);
+	 					setPlaylistIndex(PLAYLIST.indexOf(item))
+	 				}}>
 
-							<PlaylistDetails data={item} />
+	 					<PlaylistDetails data={item} />
 
-							<div className={styles.PlaylistIcons}>
-								<button
-									onClick={() => props.changeTrack([PLAYLIST.indexOf(item), 0])} 
-								>
-									<PlayButton isthisplay={isthisplay}/>
-								</button>
-								<IconButton icon={<Icons.Like />} activeicon={<Icons.LikeActive />}/>
-								<Icons.More className={styles.moreIcon}/>
-							</div>
+	 					<div className={styles.PlaylistIcons}>
+	 						<button
+	 							onClick={() => props.changeTrack([PLAYLIST.indexOf(item), 0])} 
+	 						>
+	 							<PlayButton isthisplay={isthisplay}/>
+	 						</button>
+	 						<IconButton icon={<Icons.Like />} activeicon={<Icons.LikeActive />}/>
+	 						<Icons.More className={styles.moreIcon}/>
+	 					</div>
 
-							<div className={styles.ListHead}>
-								<TextRegularM>#</TextRegularM>
-								<TextRegularM>BAŞLIK</TextRegularM>
-								<Icons.Time/>
-							</div>
+	 					<div className={styles.ListHead}>
+	 						<TextRegularM>#</TextRegularM>
+	 						<TextRegularM>BAŞLIK</TextRegularM>
+	 						<Icons.Time/>
+	 					</div>
 
-							<div className={styles.PlaylistSongs}>
-								{item.playlistData.map((song) => {
-									return (
-										<button 
-											key={song.index} 
-											onClick={() => props.changeTrack([PLAYLIST.indexOf(item), item.playlistData.indexOf(song)])} 
-											className={styles.SongBtn}
-										>
-											<PlaylistTrack 
-												data={{
-													listType: item.type,
-													song: song
-												}}
-											/>
-										</button>
-									);
-								})}
-							</div>
+	 					<div className={styles.PlaylistSongs}>
+	 						{item.playlistData.map((song) => {
+	 							return (
+	 								<button 
+	 									key={song.index} 
+	 									onClick={() => props.changeTrack([PLAYLIST.indexOf(item), item.playlistData.indexOf(song)])} 
+	 									className={styles.SongBtn}
+	 								>
+	 									<PlaylistTrack 
+	 										data={{
+	 											listType: item.type,
+	 											song: song
+	 										}}
+	 									/>
+	 								</button>
+	 							);
+	 						})}
+	 					</div>
                         </div>
                     );
                 }
+                return null;
 			})}
 		</div>
 	);
 }
 
-
-
 const mapStateToProps = (state) => {
 	return {
-		trackData: state.trackData,
+		trackData: state.player.trackData,
 	};
 };
   

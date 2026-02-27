@@ -13,7 +13,7 @@ function PlaylistCardM(props) {
 
 	useEffect(() => {
 		setIsthisPlay(parseInt(props.data.index) === props.trackData.trackKey[0])
-	})
+	}, [props.data.index, props.trackData.trackKey])
 
 	return (
 		<div className={styles.PlaylistCardSBox}>
@@ -40,8 +40,8 @@ function PlaylistCardM(props) {
 
 const mapStateToProps = (state) => {
 	return {
-		trackData: state.trackData,
-		isPlaying: state.isPlaying
+		trackData: state.player.trackData,
+		isPlaying: state.player.isPlaying
 	};
 };
   

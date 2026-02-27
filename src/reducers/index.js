@@ -1,6 +1,10 @@
+import { combineReducers } from 'redux';
+import { authReducer } from './authReducer';
 import { PLAYLIST } from "../data/index";
 import { PLAYPAUSE, CHANGETRACK } from "../actions/index";
+import { songReducer } from './songReducer';
 
+// Player Reducer (your existing code)
 const INITIAL_STATE = {
   trackData: {
     trackKey: [0, 0],
@@ -12,7 +16,7 @@ const INITIAL_STATE = {
   isPlaying: false
 };
 
-export const reducer = (state = INITIAL_STATE, action) => {
+export const playerReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case PLAYPAUSE:
       return {
@@ -43,3 +47,12 @@ export const reducer = (state = INITIAL_STATE, action) => {
       return state;
   }
 };
+
+// Root Reducer
+const rootReducer = combineReducers({
+  auth: authReducer,
+  player: playerReducer,
+  songs: songReducer,
+});
+
+export default rootReducer;
