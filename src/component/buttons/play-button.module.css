@@ -1,16 +1,18 @@
-.playBtn{
-    width: 32px;
-    height: 32px;
-    border-radius: 32px;
-    color: #000;
-    border: none;
-    background-color: #fff;
-    padding: 0;
-    transition: .2s;
+.playBtn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #1db954;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  transition: transform 0.2s ease;
 }
-.playBtn:hover{
-    transform: scale(1.1);
-}
-.playBtn svg{
-    fill: #000 !important;
+
+.playBtn:hover {
+  transform: scale(1.05);
 }

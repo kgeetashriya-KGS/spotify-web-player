@@ -4,12 +4,14 @@ import {
   deleteAlbum,
   deleteSong,
   setArtistAnalytics,
-} from '../actions/artistDashboardActions';
-import Topnav from '../component/topnav/topnav';
-import TitleL from '../component/text/title-l';
-import AlbumUploadModal from '../component/modals/album-upload-modal';
-import SongUploadModal from '../component/modals/song-upload-modal';
-import styles from '../style/artist-dashboard.module.css';
+} from '../../actions/artistDashboardActions';
+
+import Topnav from '../topnav/topnav';
+import TitleL from '../text/title-l';
+import AlbumUploadModal from './album-upload-modal';
+import SongUploadModal from './song-upload-modal';
+
+import styles from '../../style/artist-dashboard.module.css';
 
 function ArtistDashboard({
   artistDashboard,

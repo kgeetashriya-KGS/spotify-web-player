@@ -45,7 +45,7 @@ function SongCardM({ cardData, likedSongs, likeSong, unlikeSong, setSongDetails 
 }
 
 const mapStateToProps = (state) => ({
-    likedSongs: state.songs.likedSongs
+    likedSongs: state.song.likedSongs
 });
 
 export default connect(mapStateToProps, { likeSong, unlikeSong, setSongDetails })(SongCardM);

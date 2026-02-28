@@ -1,209 +1,51 @@
 .ModalOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 9999;
 }
 
 .ModalContent {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  padding: 30px;
-  border-radius: 15px;
-  width: 90%;
-  max-width: 500px;
-  color: #fff;
-  max-height: 80vh;
+  background: #181818;
+  padding: 24px;
+  width: 380px;
+  max-height: 70vh;
   overflow-y: auto;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  color: white;
+  position: relative;
 }
 
 .CloseBtn {
-  float: right;
+  position: absolute;
+  top: 10px;
+  right: 15px;
   background: none;
   border: none;
-  color: #fff;
-  font-size: 24px;
+  font-size: 20px;
+  color: white;
   cursor: pointer;
-  padding: 0;
-  margin: -10px;
 }
 
-.CloseBtn:hover {
-  color: #1db954;
-}
-
-.SongInfo {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  clear: both;
-}
-
-.SongInfo img {
-  width: 60px;
-  height: 60px;
-  border-radius: 5px;
-  object-fit: cover;
-}
-
-.SongInfo div {
-  flex: 1;
-}
-
-.SongInfo h3 {
-  margin: 0 0 5px 0;
-  color: #1db954;
-}
-
-.SongInfo p {
-  margin: 0;
-  font-size: 12px;
-  color: #aaa;
-}
-
-.ModalContent h2 {
-  margin: 0 0 15px 0;
-  color: #1db954;
-}
-
-.PlaylistList {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.PlaylistItem {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 5px;
-  color: #fff;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.PlaylistItem:hover {
-  background: rgba(29, 185, 84, 0.2);
-  border-color: #1db954;
-}
-
-.PlaylistName {
-  font-weight: 500;
-}
-
-.SongCount {
-  font-size: 12px;
-  color: #aaa;
-}
-
-.NoPlaylists {
-  text-align: center;
-  color: #aaa;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-.CreateNewBtn {
+.PlaylistBtn {
   width: 100%;
+  background: #282828;
+  border: none;
   padding: 12px;
-  background: #1db954;
-  color: #000;
-  border: none;
-  border-radius: 5px;
-  font-weight: 600;
+  margin-bottom: 12px;
+  color: white;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  margin-bottom: 15px;
+  text-align: left;
 }
 
-.CreateNewBtn:hover {
-  background: #1ed760;
-  transform: scale(1.02);
+.PlaylistBtn:hover {
+  background: #333;
 }
 
-.CreateForm {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
-.CreateForm input {
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
-  border-radius: 5px;
-}
-
-.CreateForm input:focus {
-  outline: none;
-  border-color: #1db954;
-  background: rgba(29, 185, 84, 0.1);
-}
-
-.ButtonGroup {
-  display: flex;
-  gap: 10px;
-}
-
-.CancelBtn,
-.CreateBtn {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.CancelBtn {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-}
-
-.CancelBtn:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.CreateBtn {
-  background: #1db954;
-  color: #000;
-}
-
-.CreateBtn:hover {
-  background: #1ed760;
-}
-
-.SuccessMsg {
-  color: #00ff41;
-  font-size: 13px;
-  padding: 10px;
-  background: rgba(0, 255, 65, 0.1);
-  border-radius: 5px;
-  text-align: center;
-}
-
-.ErrorMsg {
-  color: #ff6b6b;
-  font-size: 13px;
-  padding: 10px;
-  background: rgba(255, 107, 107, 0.1);
-  border-radius: 5px;
-  text-align: center;
+.EmptyText {
+  opacity: 0.7;
 }

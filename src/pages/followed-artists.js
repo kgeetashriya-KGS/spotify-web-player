@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { fetchArtists } from "../actions/artistActions";
 import styles from "./artist-subpage.module.css";
 
-function FollowedArtists({ artists, followedArtists }) {
+function FollowedArtists({ artists, followedArtists, fetchArtists }) {
+
+  useEffect(() => {
+    fetchArtists();
+  }, [fetchArtists]);
 
   const followed = artists.filter(a =>
     followedArtists.includes(a.id)
@@ -21,7 +26,7 @@ function FollowedArtists({ artists, followedArtists }) {
         {followed.map(artist => (
           <li key={artist.id}>
             <Link to={`/artist/${artist.id}`}>
-              {artist.name}
+              {artist.name} ({artist.followers})
             </Link>
           </li>
         ))}
@@ -35,4 +40,4 @@ const mapStateToProps = state => ({
   followedArtists: state.artist.followedArtists
 });
 
-export default connect(mapStateToProps)(FollowedArtists);
+export default connect(mapStateToProps, { fetchArtists })(FollowedArtists);

@@ -7,14 +7,12 @@ function Signup(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [userType, setUserType] = useState('user'); // 🔥 NEW
 
   const handleSignup = (e) => {
     e.preventDefault();
-    
-    // Clear previous errors
     props.clearAuthError();
 
-    // Basic validation
     if (!email || !password || !confirmPassword) {
       props.setAuthError('Please fill in all fields');
       return;
@@ -25,33 +23,21 @@ function Signup(props) {
       return;
     }
 
-    if (password.length < 6) {
-      props.setAuthError('Password must be at least 6 characters');
-      return;
-    }
-
-    // Dispatch Redux action with user data
     props.signupUser({
       user: {
-        id: Date.now(), // Temporary ID - will come from backend later
-        email: email,
-        username: email.split('@')[0], // Extract username from email
-        userType: 'user' // Type: user or artist
+        id: Date.now(),
+        email,
+        username: email.split('@')[0],
+        userType
       },
-      token: 'temp-token-' + Date.now(), // Temporary token - will come from backend
-      userType: 'user'
+      token: 'temp-token-' + Date.now(),
+      userType
     });
 
-    // Save to localStorage as backup
-    localStorage.setItem('user', JSON.stringify({ 
-      email, 
-      password,
-      timestamp: new Date().toISOString()
-    }));
-
-    // Redirect to home after short delay
     setTimeout(() => {
-      window.location.href = '/';
+      window.location.href = userType === 'artist' 
+        ? '/artist/dashboard' 
+        : '/';
     }, 300);
   };
 
@@ -67,6 +53,7 @@ function Signup(props) {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+
           <input
             type="password"
             placeholder="Password"
@@ -74,6 +61,7 @@ function Signup(props) {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+
           <input
             type="password"
             placeholder="Confirm Password"
@@ -81,21 +69,49 @@ function Signup(props) {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-          {props.auth.error && <p style={{ color: 'red', fontSize: '12px' }}>{props.auth.error}</p>}
-          <button type="submit" disabled={props.auth.isLoading}>
-            {props.auth.isLoading ? 'Signing up...' : 'Sign Up'}
+
+          {/* 🔥 ROLE SELECTOR */}
+          <div style={{ marginBottom: '10px' }}>
+            <label>
+              <input
+                type="radio"
+                value="user"
+                checked={userType === 'user'}
+                onChange={() => setUserType('user')}
+              /> User
+            </label>
+
+            <label style={{ marginLeft: '20px' }}>
+              <input
+                type="radio"
+                value="artist"
+                checked={userType === 'artist'}
+                onChange={() => setUserType('artist')}
+              /> Artist
+            </label>
+          </div>
+
+          {props.auth.error && (
+            <p style={{ color: 'red', fontSize: '12px' }}>
+              {props.auth.error}
+            </p>
+          )}
+
+          <button type="submit">
+            Sign Up
           </button>
         </form>
-        <p>Already have an account? <a href="/login">Log In</a></p>
       </div>
     </div>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth,
-  };
-};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
 
-export default connect(mapStateToProps, { signupUser, setAuthError, clearAuthError })(Signup);
+export default connect(mapStateToProps, {
+  signupUser,
+  setAuthError,
+  clearAuthError,
+})(Signup);

@@ -45,7 +45,7 @@ const rootReducer = combineReducers({
   playlist: playlistReducer,
   artistDashboard: artistDashboardReducer,
   player: playerReducer,
-  songs: songReducer,
+  songs: songReducer,   // ✅ THIS FIXES LIKED SONGS
   artist: artistReducer
 });
 

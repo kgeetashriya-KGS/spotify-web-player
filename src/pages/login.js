@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { loginUser, setAuthError, clearAuthError } from '../actions/authActions';
+import { loginUser, setAuthError } from '../actions/authActions';
 import styles from '../style/login.module.css';
 
 function Login(props) {
@@ -9,39 +9,29 @@ function Login(props) {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    
-    // Clear previous errors
-    props.clearAuthError();
 
-    // Basic validation
-    if (!email || !password) {
-      props.setAuthError('Please fill in all fields');
+    const savedAuth = JSON.parse(localStorage.getItem('authState'));
+
+    if (!savedAuth) {
+      props.setAuthError('No account found. Please sign up.');
       return;
     }
 
-    // Dispatch Redux action with user data
+    if (savedAuth.user.email !== email) {
+      props.setAuthError('Invalid email');
+      return;
+    }
+
     props.loginUser({
-      user: {
-        id: Date.now(), // Temporary ID - will come from backend later
-        email: email,
-        username: email.split('@')[0], // Extract username from email
-        userType: 'user' // Type: user or artist
-      },
-      token: 'temp-token-' + Date.now(), // Temporary token - will come from backend
-      userType: 'user'
+      user: savedAuth.user,
+      userType: savedAuth.userType,
+      token: savedAuth.token
     });
 
-    // Save to localStorage as backup
-    localStorage.setItem('user', JSON.stringify({ 
-      email, 
-      password,
-      timestamp: new Date().toISOString()
-    }));
-
-    // Redirect to home after short delay
-    setTimeout(() => {
-      window.location.href = '/';
-    }, 300);
+    window.location.href =
+      savedAuth.userType === 'artist'
+        ? '/artist/dashboard'
+        : '/';
   };
 
   return (
@@ -63,21 +53,22 @@ function Login(props) {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          {props.auth.error && <p style={{ color: 'red', fontSize: '12px' }}>{props.auth.error}</p>}
-          <button type="submit" disabled={props.auth.isLoading}>
-            {props.auth.isLoading ? 'Logging in...' : 'Log In'}
-          </button>
-        </form>
-        <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+          {props.auth.error && (
+            <p style={{ color: 'red', fontSize: '12px' }}>
+              {props.auth.error}
+            </p>
+          )}
+          <button type="submit">Log In</button>
+        </form><p style={{ marginTop: "10px" }}>
+  Don't have an account? <a href="/signup">Sign Up</a>
+</p>
       </div>
     </div>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth,
-  };
-};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
 
-export default connect(mapStateToProps, { loginUser, setAuthError, clearAuthError })(Login);
+export default connect(mapStateToProps, { loginUser, setAuthError })(Login);

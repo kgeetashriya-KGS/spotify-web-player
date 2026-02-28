@@ -6,6 +6,7 @@ import {
   followArtist,
   unfollowArtist
 } from "../actions/artistActions";
+import { updateArtistDashboardProfile } from "../actions/artistDashboardActions";
 import styles from "./artist-profile.module.css";
 
 function ArtistProfile({
@@ -14,7 +15,8 @@ function ArtistProfile({
   isLoading,
   fetchArtists,
   followArtist,
-  unfollowArtist
+  unfollowArtist,
+  updateArtistDashboardProfile
 }) {
   const { id } = useParams();
 
@@ -34,10 +36,30 @@ function ArtistProfile({
 
   const isFollowing = followedArtists.includes(id);
 
+  const formatNumber = (num) => {
+    if (num >= 1000000) return (num / 1000000).toFixed(1) + "M";
+    if (num >= 1000) return (num / 1000).toFixed(1) + "K";
+    return num;
+  };
+
+  const handleFollowToggle = () => {
+    if (isFollowing) {
+      unfollowArtist(id);
+      updateArtistDashboardProfile({
+        followerCount: artist.followers - 1
+      });
+    } else {
+      followArtist(id);
+      updateArtistDashboardProfile({
+        followerCount: artist.followers + 1
+      });
+    }
+  };
+
   return (
     <div className={styles.page}>
       
-      {/* 🎤 HERO SECTION */}
+      {/* HERO SECTION */}
       <div
         className={styles.hero}
         style={{ backgroundImage: `url(${artist.image})` }}
@@ -46,18 +68,18 @@ function ArtistProfile({
           <h1 className={styles.name}>{artist.name}</h1>
           <p className={styles.genre}>{artist.genre}</p>
 
+          {/* 👥 FOLLOWERS COUNT */}
+          <p className={styles.followers}>
+            {formatNumber(artist.followers)} followers
+          </p>
+
           <button
-            className={styles.followBtn}
-            onClick={() =>
-              isFollowing
-                ? unfollowArtist(id)
-                : followArtist(id)
-            }
+            className={`${styles.followBtn} ${isFollowing ? styles.following : ""}`}
+            onClick={handleFollowToggle}
           >
             {isFollowing ? "Following" : "Follow"}
           </button>
 
-          {/* 🔗 NAVIGATION LINKS */}
           <div className={styles.navLinks}>
             <Link to={`/artist/${id}/songs`} className={styles.linkBtn}>
               View All Songs
@@ -74,7 +96,6 @@ function ArtistProfile({
         </div>
       </div>
 
-      {/* 🎵 PREVIEW CONTENT */}
       <div className={styles.content}>
         <section>
           <h2>Popular Songs</h2>
@@ -107,5 +128,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   fetchArtists,
   followArtist,
-  unfollowArtist
+  unfollowArtist,
+  updateArtistDashboardProfile
 })(ArtistProfile);

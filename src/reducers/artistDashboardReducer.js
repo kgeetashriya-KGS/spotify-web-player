@@ -2,18 +2,18 @@ import {
   SET_ARTIST_DASHBOARD,
   UPDATE_ARTIST_DASHBOARD_PROFILE,
   CREATE_ALBUM,
-  UPDATE_ALBUM,
   DELETE_ALBUM,
   CREATE_SONG,
-  UPDATE_SONG,
   DELETE_SONG,
-  SET_ARTIST_ANALYTICS,
-  SET_DASHBOARD_LOADING,
-  SET_DASHBOARD_ERROR,
-  CLEAR_DASHBOARD_ERROR,
+  SET_ARTIST_ANALYTICS
 } from "../actions/artistDashboardActions";
 
-const INITIAL_DASHBOARD_STATE = {
+const getSavedState = () => {
+  const saved = localStorage.getItem("artistDashboard");
+  return saved ? JSON.parse(saved) : null;
+};
+
+const INITIAL_STATE = getSavedState() || {
   profile: {
     id: null,
     artistName: "",
@@ -33,165 +33,89 @@ const INITIAL_DASHBOARD_STATE = {
     monthlyStreams: [],
     topSongs: [],
   },
-  isLoading: false,
-  error: null,
 };
 
-export const artistDashboardReducer = (state = INITIAL_DASHBOARD_STATE, action) => {
-  switch (action.type) {
-    case SET_ARTIST_DASHBOARD:
-      return {
-        ...state,
-        profile: action.payload,
-        isLoading: false,
-        error: null,
-      };
+const saveToStorage = (state) => {
+  localStorage.setItem("artistDashboard", JSON.stringify(state));
+};
 
-    case UPDATE_ARTIST_DASHBOARD_PROFILE:
-      return {
-        ...state,
-        profile: {
-          ...state.profile,
-          ...action.payload,
-        },
-        isLoading: false,
-        error: null,
-      };
+export const artistDashboardReducer = (state = INITIAL_STATE, action) => {
+  let newState;
+
+  switch (action.type) {
 
     case CREATE_ALBUM: {
       const newAlbum = {
         id: Date.now(),
-        artistId: state.profile.id,
-        title: action.payload.title,
-        releaseDate: action.payload.releaseDate,
-        description: action.payload.description || "",
-        albumArt: action.payload.albumArt || null,
-        songs: [],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+        ...action.payload,
+        albumArt:
+          action.payload.albumArt ||
+          "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4",
+        songs: []
       };
-      return {
+
+      newState = {
         ...state,
-        albums: [...state.albums, newAlbum],
-        error: null,
+        albums: [...state.albums, newAlbum]
       };
+
+      saveToStorage(newState);
+      return newState;
     }
-
-    case UPDATE_ALBUM:
-      return {
-        ...state,
-        albums: state.albums.map((album) => {
-          if (album.id === action.payload.albumId) {
-            return {
-              ...album,
-              ...action.payload.albumData,
-              updatedAt: new Date().toISOString(),
-            };
-          }
-          return album;
-        }),
-        error: null,
-      };
-
-    case DELETE_ALBUM:
-      return {
-        ...state,
-        albums: state.albums.filter(
-          (album) => album.id !== action.payload
-        ),
-        songs: state.songs.filter(
-          (song) => song.albumId !== action.payload
-        ),
-        error: null,
-      };
 
     case CREATE_SONG: {
+      const numericAlbumId = action.payload.albumId
+        ? Number(action.payload.albumId)
+        : null;
+
       const newSong = {
         id: Date.now(),
-        artistId: state.profile.id,
-        albumId: action.payload.albumId || null,
-        title: action.payload.title,
-        duration: action.payload.duration,
-        songArt: action.payload.songArt || null,
-        audioFile: action.payload.audioFile || null,
-        releaseDate: action.payload.releaseDate,
-        description: action.payload.description || "",
-        likes: 0,
-        plays: 0,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+        ...action.payload,
+        albumId: numericAlbumId
       };
-      return {
+
+      newState = {
         ...state,
         songs: [...state.songs, newSong],
-        albums: state.albums.map((album) => {
-          if (album.id === action.payload.albumId) {
-            return {
-              ...album,
-              songs: [...album.songs, newSong.id],
-            };
-          }
-          return album;
-        }),
-        error: null,
+        albums: state.albums.map(album =>
+          album.id === numericAlbumId
+            ? { ...album, songs: [...album.songs, newSong.id] }
+            : album
+        )
       };
+
+      saveToStorage(newState);
+      return newState;
     }
 
-    case UPDATE_SONG:
-      return {
+    case DELETE_SONG: {
+      newState = {
         ...state,
-        songs: state.songs.map((song) => {
-          if (song.id === action.payload.songId) {
-            return {
-              ...song,
-              ...action.payload.songData,
-              updatedAt: new Date().toISOString(),
-            };
-          }
-          return song;
-        }),
-        error: null,
+        songs: state.songs.filter(s => s.id !== action.payload),
+        albums: state.albums.map(album => ({
+          ...album,
+          songs: album.songs.filter(id => id !== action.payload)
+        }))
       };
 
-    case DELETE_SONG:
-      return {
+      saveToStorage(newState);
+      return newState;
+    }
+
+    case DELETE_ALBUM: {
+      newState = {
         ...state,
-        songs: state.songs.filter(
-          (song) => song.id !== action.payload
-        ),
-        albums: state.albums.map((album) => ({
-          ...album,
-          songs: album.songs.filter((songId) => songId !== action.payload),
-        })),
-        error: null,
+        albums: state.albums.filter(a => a.id !== action.payload)
       };
+
+      saveToStorage(newState);
+      return newState;
+    }
 
     case SET_ARTIST_ANALYTICS:
-      return {
-        ...state,
-        analytics: action.payload,
-        isLoading: false,
-        error: null,
-      };
-
-    case SET_DASHBOARD_LOADING:
-      return {
-        ...state,
-        isLoading: action.payload,
-      };
-
-    case SET_DASHBOARD_ERROR:
-      return {
-        ...state,
-        error: action.payload,
-        isLoading: false,
-      };
-
-    case CLEAR_DASHBOARD_ERROR:
-      return {
-        ...state,
-        error: null,
-      };
+      newState = { ...state, analytics: action.payload };
+      saveToStorage(newState);
+      return newState;
 
     default:
       return state;

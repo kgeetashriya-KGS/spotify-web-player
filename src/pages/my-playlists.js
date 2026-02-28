@@ -12,6 +12,7 @@ import styles from '../style/my-playlists.module.css';
 
 function MyPlaylistsPage({
   myPlaylists,
+  userId,
   deletePlaylist,
   updatePlaylistVisibility,
   removeSongFromPlaylist,
@@ -21,16 +22,24 @@ function MyPlaylistsPage({
   const [deleteConfirmId, setDeleteConfirmId] = useState(null);
 
   const handleDeletePlaylist = (playlistId) => {
-    deletePlaylist(playlistId);
+    deletePlaylist({ userId, playlistId });
     setDeleteConfirmId(null);
   };
 
   const handleToggleVisibility = (playlistId, currentVisibility) => {
-    updatePlaylistVisibility(playlistId, !currentVisibility);
+    updatePlaylistVisibility({
+      userId,
+      playlistId,
+      isPublic: !currentVisibility
+    });
   };
 
   const handleRemoveSong = (playlistId, songId) => {
-    removeSongFromPlaylist(playlistId, songId);
+    removeSongFromPlaylist({
+      userId,
+      playlistId,
+      songId
+    });
   };
 
   return (
@@ -78,6 +87,7 @@ function MyPlaylistsPage({
                     >
                       {playlist.isPublic ? '🔓' : '🔒'}
                     </button>
+
                     <button
                       className={styles.DeleteBtn}
                       onClick={() => setDeleteConfirmId(playlist.id)}
@@ -111,26 +121,27 @@ function MyPlaylistsPage({
                   </button>
                 )}
 
-                {expandedPlaylistId === playlist.id && playlist.songs.length > 0 && (
-                  <div className={styles.SongsList}>
-                    {playlist.songs.map((song, index) => (
-                      <div key={song.id || index} className={styles.SongItem}>
-                        <span className={styles.SongInfo}>
-                          <strong>{song.songName}</strong>
-                          <small>{song.songArtist}</small>
-                        </span>
-                        <button
-                          className={styles.RemoveBtn}
-                          onClick={() =>
-                            handleRemoveSong(playlist.id, song.id)
-                          }
-                        >
-                          ✕
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                {expandedPlaylistId === playlist.id &&
+                  playlist.songs.length > 0 && (
+                    <div className={styles.SongsList}>
+                      {playlist.songs.map((song, index) => (
+                        <div key={song.id || index} className={styles.SongItem}>
+                          <span className={styles.SongInfo}>
+                            <strong>{song.songName || song.title}</strong>
+                            <small>{song.songArtist || song.artist}</small>
+                          </span>
+                          <button
+                            className={styles.RemoveBtn}
+                            onClick={() =>
+                              handleRemoveSong(playlist.id, song.id)
+                            }
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
 
                 {deleteConfirmId === playlist.id && (
                   <div className={styles.ConfirmDelete}>
@@ -165,9 +176,13 @@ function MyPlaylistsPage({
   );
 }
 
-const mapStateToProps = (state) => ({
-  myPlaylists: state.playlist.myPlaylists,
-});
+const mapStateToProps = (state) => {
+  const userId = state.auth.user?.id;
+  return {
+    myPlaylists: state.playlist.playlistsByUser[userId] || [],
+    userId
+  };
+};
 
 export default connect(mapStateToProps, {
   deletePlaylist,

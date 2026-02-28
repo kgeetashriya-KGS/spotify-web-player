@@ -3,20 +3,25 @@ import { connect } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import styles from "./artist-subpage.module.css";
 
-function ArtistAlbums({ artists }) {
+function ArtistAlbums({ artistDashboard }) {
   const { id } = useParams();
 
-  const artist = artists.find(a => a.id === id);
-
-  if (!artist) return <div className={styles.loading}>Artist not found.</div>;
+  // Only show albums for logged-in artist
+  if (artistDashboard.profile.id !== id) {
+    return <div className={styles.loading}>Artist not found.</div>;
+  }
 
   return (
     <div className={styles.page}>
-      <h1>{artist.name} — Albums</h1>
+      <h1>{artistDashboard.profile.artistName} — Albums</h1>
 
       <ul className={styles.list}>
-        {artist.albums.map(album => (
-          <li key={album.id}>{album.title}</li>
+        {artistDashboard.albums.map(album => (
+          <li key={album.id}>
+            <Link to={`/album/${album.id}`}>
+              {album.title}
+            </Link>
+          </li>
         ))}
       </ul>
 
@@ -28,7 +33,7 @@ function ArtistAlbums({ artists }) {
 }
 
 const mapStateToProps = state => ({
-  artists: state.artist.artists
+  artistDashboard: state.artistDashboard
 });
 
 export default connect(mapStateToProps)(ArtistAlbums);

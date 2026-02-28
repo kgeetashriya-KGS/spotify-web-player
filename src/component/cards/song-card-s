@@ -1,31 +1,26 @@
-import { useEffect, useState } from "react";
+import React from 'react';
 import { connect } from 'react-redux';
 import { likeSong, unlikeSong, setSongDetails } from '../../actions/songActions';
 import TextBoldL from '../text/text-bold-l';
 import TextRegularM from '../text/text-regular-m';
-
 import styles from "./song-card-s.module.css";
 
 function SongCardS(props) {
-  const [isLiked, setIsLiked] = useState(false);
 
-  useEffect(() => {
-    setIsLiked(props.likedSongIds.has(props.data.index));
-  }, [props.data.index, props.likedSongIds]);
+  const isLiked = props.likedSongs.includes(props.data.id);
 
   const handleLike = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     if (isLiked) {
-      props.unlikeSong(props.data.index);
+      props.unlikeSong(props.data.id);
     } else {
-      props.likeSong(props.data.index);
+      props.likeSong(props.data.id);
     }
   };
 
-  const handleClick = (e) => {
-    e.preventDefault();
+  const handleClick = () => {
     props.setSongDetails(props.data);
   };
 
@@ -33,13 +28,14 @@ function SongCardS(props) {
     <div className={styles.SongCardSBox}>
       <div className={styles.SongCardS} onClick={handleClick}>
         <div className={styles.ImgBox}>
-          <img src={props.data.songimg} alt={props.data.songName} />
+          <img src={props.data.coverart} alt={props.data.title} />
         </div>
         <div className={styles.Title}>
-          <TextBoldL>{props.data.songName}</TextBoldL>
-          <TextRegularM>{props.data.songArtist}</TextRegularM>
+          <TextBoldL>{props.data.title}</TextBoldL>
+          <TextRegularM>{props.data.artist}</TextRegularM>
         </div>
       </div>
+
       <button
         onClick={handleLike}
         className={`${styles.LikeBtn} ${isLiked ? styles.Liked : ''}`}
@@ -50,10 +46,12 @@ function SongCardS(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    likedSongIds: state.songs.likedSongIds,
-  };
-};
+const mapStateToProps = (state) => ({
+  likedSongs: state.songs.likedSongs
+});
 
-export default connect(mapStateToProps, { likeSong, unlikeSong, setSongDetails })(SongCardS);
+export default connect(mapStateToProps, {
+  likeSong,
+  unlikeSong,
+  setSongDetails
+})(SongCardS);

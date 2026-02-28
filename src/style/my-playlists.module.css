@@ -33,9 +33,12 @@
 .Content {
   position: relative;
   z-index: 1;
-  padding: 80px 20px 40px;
-  max-width: 1400px;
-  margin: 0 auto;
+  padding: 100px 40px 40px;  /* slightly more top padding */
+  margin-left: 240px;        /* ← THIS IS THE FIX */
+}
+.MyPlaylistsPage {
+  display: flex;
+  flex-direction: column;
 }
 
 .Header {

@@ -15,17 +15,19 @@ export const createPlaylist = (playlistData) => {
   return { type: CREATE_PLAYLIST, payload: playlistData };
 };
 
-export const deletePlaylist = (playlistId) => {
-  return { type: DELETE_PLAYLIST, payload: playlistId };
-};
+export const deletePlaylist = (payload) => ({
+  type: DELETE_PLAYLIST,
+  payload
+});
 
 export const updatePlaylistVisibility = (playlistId, isPublic) => {
   return { type: UPDATE_PLAYLIST_VISIBILITY, payload: { playlistId, isPublic } };
 };
 
-export const addSongToPlaylist = (playlistId, song) => {
-  return { type: ADD_SONG_TO_PLAYLIST, payload: { playlistId, song } };
-};
+export const addSongToPlaylist = (payload) => ({
+  type: ADD_SONG_TO_PLAYLIST,
+  payload
+});
 
 export const removeSongFromPlaylist = (playlistId, songId) => {
   return { type: REMOVE_SONG_FROM_PLAYLIST, payload: { playlistId, songId } };

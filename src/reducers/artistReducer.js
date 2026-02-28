@@ -2,88 +2,66 @@ import {
   FETCH_ARTISTS,
   SELECT_ARTIST,
   FOLLOW_ARTIST,
-  UNFOLLOW_ARTIST,
-  SET_ARTIST_LOADING,
-  SET_ARTIST_ERROR,
-  CLEAR_ARTIST_ERROR
+  UNFOLLOW_ARTIST
 } from "../actions/artistActions";
+
+const loadFollowed = () => {
+  return JSON.parse(localStorage.getItem("followedArtists")) || [];
+};
 
 const initialState = {
   artists: [],
   selectedArtist: null,
-  followedArtists: JSON.parse(localStorage.getItem("followedArtists")) || [],
-  isLoading: false,
-  error: null
+  followedArtists: loadFollowed(),
+};
+
+const saveFollowed = (data) => {
+  localStorage.setItem("followedArtists", JSON.stringify(data));
 };
 
 const artistReducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case SET_ARTIST_LOADING:
-      return {
-        ...state,
-        isLoading: action.payload
-      };
-
     case FETCH_ARTISTS:
-      return {
-        ...state,
-        artists: action.payload,
-        isLoading: false
-      };
+      return { ...state, artists: action.payload };
 
     case SELECT_ARTIST:
+      return { ...state, selectedArtist: action.payload };
+
+    case FOLLOW_ARTIST: {
+      if (state.followedArtists.includes(action.payload)) return state;
+
+      const updated = [...state.followedArtists, action.payload];
+      saveFollowed(updated);
+
       return {
         ...state,
-        selectedArtist: action.payload
-      };
-
-    case FOLLOW_ARTIST:
-      if (!state.followedArtists.includes(action.payload)) {
-        return {
-          ...state,
-          followedArtists: [...state.followedArtists, action.payload]
-        };
-      }
-      return state;
-
-    case UNFOLLOW_ARTIST:
-      return {
-        ...state,
-        followedArtists: state.followedArtists.filter(
-          id => id !== action.payload
+        followedArtists: updated,
+        artists: state.artists.map(a =>
+          a.id === action.payload
+            ? { ...a, followers: a.followers + 1 }
+            : a
         )
       };
+    }
 
-    case SET_ARTIST_ERROR:
+    case UNFOLLOW_ARTIST: {
+      const updated = state.followedArtists.filter(
+        id => id !== action.payload
+      );
+
+      saveFollowed(updated);
+
       return {
         ...state,
-        error: action.payload,
-        isLoading: false
+        followedArtists: updated,
+        artists: state.artists.map(a =>
+          a.id === action.payload
+            ? { ...a, followers: a.followers - 1 }
+            : a
+        )
       };
-
-    case CLEAR_ARTIST_ERROR:
-      return {
-        ...state,
-        error: null
-      };
-      case FOLLOW_ARTIST:
-  const updatedFollow = [...state.followedArtists, action.payload];
-  localStorage.setItem("followedArtists", JSON.stringify(updatedFollow));
-  return {
-    ...state,
-    followedArtists: updatedFollow
-  };
-
-case UNFOLLOW_ARTIST:
-  const filtered = state.followedArtists.filter(
-    id => id !== action.payload
-  );
-  localStorage.setItem("followedArtists", JSON.stringify(filtered));
-  return {
-    ...state,
-    followedArtists: filtered
-  };
+    }
 
     default:
       return state;
