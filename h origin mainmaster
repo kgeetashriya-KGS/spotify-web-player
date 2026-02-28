@@ -1,0 +1,359 @@
+[33mcommit 988b2e6170664a2cdb24a8627e341035e24d8e10[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: kgeetashriya-KGS <kgeetashriya@gmail.com>
+Date:   Fri Feb 27 22:57:50 2026 +0530
+
+    first commit
+
+[33mcommit feee581f89b62e5daa6eff8ef5feb1829568af71[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Oğuzhan ULUKAYA <55917459+oguz3@users.noreply.github.com>
+Date:   Sat Oct 30 13:22:20 2021 +0300
+
+    Update index.js
+
+[33mcommit be9fa3f92c1a6dd215ec1a686d1aa267ec5d0463[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Wed Mar 31 16:15:34 2021 +0300
+
+    Update range-slider thumb
+
+[33mcommit 78cdff92d109c43a25065d9a3472ef2beb861598[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Wed Mar 31 14:24:43 2021 +0300
+
+    Added rangeSlider thumb hover
+
+[33mcommit a3cab79e9b0b884c433efb50131f36754597738c[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Wed Mar 17 19:35:34 2021 +0300
+
+    Update convertTime.js
+
+[33mcommit 1bf67257be03a581650e07df076e3ea11dcb1dcb[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 16 19:26:18 2021 +0300
+
+    Update music-control-box.module.css
+
+[33mcommit 368c5765bac8d382ddffca91b6be838f3ae60026[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 16 19:12:08 2021 +0300
+
+    Update footer-right/SoundLevel
+
+[33mcommit 37801f43d2e5f88a6cece9b837d78e9fa90ccb81[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 16 19:07:20 2021 +0300
+
+    Update playlist-card component(added changeTrack)
+
+[33mcommit 6bcde69de460822aedace551ce27e66277a57ff3[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 16 18:46:00 2021 +0300
+
+    Update Playlist page & playlist-track-component
+
+[33mcommit 63866239f70a368fd395ced6d1f38c4cccbf7d4c[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 16 17:29:27 2021 +0300
+
+    Update library.js
+
+[33mcommit cba23acdbbd6940a9aa7a0a699609953d9749f72[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 16 17:26:28 2021 +0300
+
+    Update Home & playlist-card
+
+[33mcommit 0504a09cf980d1da312d9bd0c60aefef5569a3c4[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 16 17:14:53 2021 +0300
+
+    Update footer.js
+
+[33mcommit cae5798942447209faa9bbcfd8d694ccedd8c855[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 16 16:56:03 2021 +0300
+
+    Update play-button.js
+
+[33mcommit 9c75a560eb589983544852ef0ab28ea4853ec51e[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 16 16:40:02 2021 +0300
+
+    Update music-control-box.js
+
+[33mcommit 12888cd60099884b7316c92bc366468d42c7fb8c[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 16 16:30:18 2021 +0300
+
+    Update footer-left.js
+
+[33mcommit 8b19f0be7d98d9921801bc2ac2349d9b485e30d3[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 16 16:21:41 2021 +0300
+
+    Added reducer & actions
+
+[33mcommit d717a8b41db7aea559a73a92f0a7d0638ea9e8aa[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 16 13:34:21 2021 +0300
+
+    I'm trying something
+
+[33mcommit 8f7ad06021b64221389e34f192775941257e1e6f[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 16 13:32:03 2021 +0300
+
+    Update icon-button.js
+
+[33mcommit 32c316c6ada31618457262a9c3a08439cfdecf50[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 16 13:20:22 2021 +0300
+
+    Updata App.js
+
+[33mcommit 4484c8000ab71c7be3322fbe9d23758485757639[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Mon Mar 15 21:54:03 2021 +0300
+
+    Update sidebar.module.css
+
+[33mcommit 3d23f5e88e0b23693a3e308dc0e20c5efbedd447[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Mon Mar 15 18:28:58 2021 +0300
+
+    Update playlist-card
+    
+    Play button moved out of link tag
+
+[33mcommit a8be873c4caf1aae9ba9efbe0054870352a28729[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Mon Mar 15 16:51:30 2021 +0300
+
+    Update Playlist-cards
+    
+    Added Active class
+
+[33mcommit e146a1a7f303e837d376daec893787c32cd9a396[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Mon Mar 15 16:22:39 2021 +0300
+
+    Added new props in play-button
+
+[33mcommit 4cffacd216bd6b09a52fec6a1d945556011c7483[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Mon Mar 15 14:32:02 2021 +0300
+
+    update mobile scrollbar height
+
+[33mcommit 239504b9efba336f8f5362444a0c81d4b4e6de86[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Mon Mar 15 14:29:52 2021 +0300
+
+    Added resizability to sidebar
+
+[33mcommit dcb15c506c31363babb8184c5726b49ff63cab74[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Sat Mar 13 17:58:09 2021 +0300
+
+    added media query
+
+[33mcommit ae069679b5644c17e6651649f985f25b58acd3a4[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Sat Mar 13 14:36:58 2021 +0300
+
+    update component attributes
+
+[33mcommit 2845faa41c3d6e14ca356af9430e71fb2e247b4d[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Fri Mar 12 17:13:35 2021 +0300
+
+    Update readme & gitignore
+
+[33mcommit 40fff1219d20140e58ba1aa4c7a02410561ba2f9[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Fri Mar 12 16:23:17 2021 +0300
+
+    added library tab btn
+
+[33mcommit 7c7a53ee93a5dfa08209fbbe2a0f979f1443577a[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Fri Mar 12 15:27:38 2021 +0300
+
+    searchpage-card componenet
+
+[33mcommit 2f1103861d3b520348a7858e359407868f6d3615[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Fri Mar 12 15:21:50 2021 +0300
+
+    Added search page card componenet & search input
+
+[33mcommit 552001ed58d61b46f95222addb0a8ad582e19c94[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Fri Mar 12 13:37:51 2021 +0300
+
+    Added time icon & playlist list title
+
+[33mcommit 4ca94bb09b8e253e6bed2d7bdba117aa1b5b4e3b[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Thu Mar 11 19:22:15 2021 +0300
+
+    format data file
+
+[33mcommit a99e8796b28341cd150ea4cd8c8c313407af5286[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Thu Mar 11 18:51:26 2021 +0300
+
+    Added playlisttrack component and set play song link in localstorage
+
+[33mcommit 3c6b37878786888f5a28d50024bad16e100dcf36[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Thu Mar 11 16:49:54 2021 +0300
+
+    Added check if the sound is end
+
+[33mcommit 161b02d4ccd13bb2676773a350d2e854a079300a[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Thu Mar 11 15:12:29 2021 +0300
+
+    State made multiple state
+
+[33mcommit 73e80b7c43a2a9b7587dcdd739f20c7933ac22f1[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Wed Mar 10 22:25:51 2021 +0300
+
+    added music control btn function
+
+[33mcommit d83012276faced71cc451e87dc07c669acbf7cd6[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Wed Mar 10 18:45:50 2021 +0300
+
+    Bişiler
+
+[33mcommit 107aca559053df9ad08027105eb077afc2c67be7[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Wed Mar 10 15:05:04 2021 +0300
+
+    Added music nex prev button function
+
+[33mcommit 930dc6704a48a951dd663adefbbd99d71e3414cc[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Wed Mar 10 13:23:59 2021 +0300
+
+    added dynamic route
+
+[33mcommit 0c5d5e88a672553fe5a0c1684d7ea836c1af69a0[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 9 19:50:31 2021 +0300
+
+    bla
+
+[33mcommit 9a7f008126b788afc2b6f503936c44d016153dc0[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 9 19:19:11 2021 +0300
+
+    bla bla
+
+[33mcommit f460ec3fd6844f734195d8d5a193da74bf569418[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 9 16:30:51 2021 +0300
+
+    added data file & small playlist card
+
+[33mcommit 07b85e7f025b9d9303ef00f2a6099b4d89a9e3c8[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 9 14:26:05 2021 +0300
+
+    added next page & prev page button
+
+[33mcommit d900b407d2cb5d0509f073f8b56aec40d89d8d37[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 9 13:56:15 2021 +0300
+
+    added topnav
+
+[33mcommit 3e63ea1b26716c0ccfe8f0f99c48fa573287a3a4[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 9 13:09:11 2021 +0300
+
+    change track
+
+[33mcommit 335add9f30f7eddd080c2ae297b99a2506bf7b56[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Thu Mar 4 20:32:50 2021 +0300
+
+    Added  music player
+
+[33mcommit 4f5014f4f4cf6a07a5dec47c770872c7c1c86e79[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Thu Mar 4 17:41:00 2021 +0300
+
+    added butons folder
+
+[33mcommit f5995bd0e76c1c34ab5a5c8fba496b3e1466722a[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Thu Mar 4 15:31:00 2021 +0300
+
+    footer completed
+
+[33mcommit 3cafa3e8eb2bc0d7c8bdae41f84befdb09a6a29a[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Thu Mar 4 13:59:44 2021 +0300
+
+    Added footer and footer-left component.
+
+[33mcommit 71d4cea62adc75d710f01d731d064f88b48d458c[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Thu Mar 4 12:18:05 2021 +0300
+
+    added key for map() function
+
+[33mcommit 22d5ec1c9e5f0c68f01d1f70a73e1047c94f6926[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Wed Mar 3 18:31:05 2021 +0300
+
+    Added constant file
+    
+    All navigation objects are imported from the constant file. Writing with map() function.
+
+[33mcommit 5b7c01ef334b7f07f6d2d13f58f7611e37bab5d4[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Wed Mar 3 17:18:30 2021 +0300
+
+    Added navbar img & added navbar playlist section
+
+[33mcommit 56db4ff25aa41940f13c900a17913f297491ec2d[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Wed Mar 3 15:57:50 2021 +0300
+
+    NavLink active style
+
+[33mcommit e22300e1c2f93195a59a72b8b0948fb50ec1b4d4[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Wed Mar 3 15:03:21 2021 +0300
+
+    Add logo component
+
+[33mcommit 6f37bad8e98aa0d83cdee5afff1277f5b59db32c[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 2 20:48:48 2021 +0300
+
+    Add react-router
+
+[33mcommit a6b6d52602b4bf951c18dc3b417df368d7799420[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 2 19:00:46 2021 +0300
+
+    NavButton icon filter
+
+[33mcommit 29bdee23cbadf558401ea648b0093e2358ed00d5[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 2 16:51:33 2021 +0300
+
+    Start Project
+
+[33mcommit f1982c2cb742a0da6565508a62a7563c711b8dc4[m
+Author: oğuzulukaya <55917459+oguz3@users.noreply.github.com>
+Date:   Tue Mar 2 13:20:30 2021 +0300
+
+    Initialize project using Create React App

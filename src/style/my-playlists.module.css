@@ -1,0 +1,285 @@
+.MyPlaylistsPage {
+  position: relative;
+  min-height: 100vh;
+  background: #121212;
+  color: #fff;
+}
+
+.HoverBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(29, 185, 84, 0.1) 0%,
+    rgba(29, 185, 84, 0.05) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.Bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #121212;
+  z-index: -1;
+}
+
+.Content {
+  position: relative;
+  z-index: 1;
+  padding: 80px 20px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.CreateBtn {
+  padding: 10px 20px;
+  background: #1db954;
+  color: #000;
+  border: none;
+  border-radius: 25px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.CreateBtn:hover {
+  background: #1ed760;
+  transform: scale(1.05);
+}
+
+.EmptyState {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.EmptyState p {
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: #aaa;
+}
+
+.EmptyState button {
+  padding: 12px 30px;
+  background: #1db954;
+  color: #000;
+  border: none;
+  border-radius: 25px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.EmptyState button:hover {
+  background: #1ed760;
+  transform: scale(1.05);
+}
+
+.PlaylistsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.PlaylistCard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.PlaylistCard:hover {
+  background: rgba(29, 185, 84, 0.1);
+  border-color: #1db954;
+}
+
+.CardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 15px;
+}
+
+.CardHeader h3 {
+  margin: 0;
+  color: #1db954;
+  flex: 1;
+}
+
+.CardActions {
+  display: flex;
+  gap: 10px;
+}
+
+.VisibilityBtn,
+.DeleteBtn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 5px;
+  transition: transform 0.2s;
+}
+
+.VisibilityBtn:hover,
+.DeleteBtn:hover {
+  transform: scale(1.2);
+}
+
+.Description {
+  font-size: 13px;
+  color: #aaa;
+  margin: 10px 0;
+}
+
+.SongCount {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 15px;
+}
+
+.ExpandBtn {
+  width: 100%;
+  padding: 10px;
+  background: rgba(29, 185, 84, 0.2);
+  border: 1px solid #1db954;
+  color: #1db954;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+}
+
+.ExpandBtn:hover {
+  background: #1db954;
+  color: #000;
+}
+
+.SongsList {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.SongItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.2s;
+}
+
+.SongItem:hover {
+  background: rgba(29, 185, 84, 0.1);
+}
+
+.SongInfo {
+  flex: 1;
+}
+
+.SongInfo strong {
+  display: block;
+  color: #fff;
+  font-size: 14px;
+}
+
+.SongInfo small {
+  display: block;
+  color: #aaa;
+  font-size: 12px;
+}
+
+.RemoveBtn {
+  background: none;
+  border: none;
+  color: #ff6b6b;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 5px;
+  transition: transform 0.2s;
+}
+
+.RemoveBtn:hover {
+  transform: scale(1.3);
+}
+
+.ConfirmDelete {
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid #ff6b6b;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.ConfirmDelete p {
+  margin: 0 0 15px 0;
+  color: #ff6b6b;
+}
+
+.ConfirmButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.CancelBtn,
+.ConfirmBtn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.CancelBtn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.CancelBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.ConfirmBtn {
+  background: #ff6b6b;
+  color: #000;
+}
+
+.ConfirmBtn:hover {
+  background: #ff8585;
+}
+
+@media (max-width: 768px) {
+  .PlaylistsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .Header {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .Content {
+    padding: 70px 15px 40px;
+  }
+}

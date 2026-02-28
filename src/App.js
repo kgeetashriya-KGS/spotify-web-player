@@ -21,6 +21,11 @@ import ArtistSongs from "./pages/artist-songs";
 import ArtistAlbums from "./pages/artist-albums";
 import FollowedArtists from "./pages/followed-artists";
 import Artists from "./pages/artists";
+import MyPlaylistsPage from './pages/my-playlists';
+import PublicPlaylistsPage from './pages/public-playlists';
+import ArtistProfileEditor from './pages/artist-profile-editor';
+import ArtistDashboard from './pages/artist-dashboard';
+
 
 // Protected Route Component
 function ProtectedRoute({ component: Component, isAuthenticated, ...rest }) {
@@ -124,7 +129,22 @@ function App(props) {
             component={ArtistProfile}
             isAuthenticated={isAuthenticated}
           />
-
+          <Route 
+  path="/my-playlists" 
+  element={<ProtectedRoute><MyPlaylistsPage /></ProtectedRoute>} 
+/>
+<Route 
+  path="/discover-playlists" 
+  element={<PublicPlaylistsPage />} 
+/>
+<Route 
+  path="/artist/profile" 
+  element={<ProtectedRoute><ArtistProfileEditor /></ProtectedRoute>} 
+/>
+<Route 
+  path="/artist/dashboard" 
+  element={<ProtectedRoute><ArtistDashboard /></ProtectedRoute>} 
+/>
           <Route>
             <Redirect to="/" />
           </Route>

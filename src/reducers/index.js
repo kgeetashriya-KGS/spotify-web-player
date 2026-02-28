@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 import { authReducer } from './authReducer';
+import { playlistReducer } from './playlistReducer';
+import { artistDashboardReducer } from './artistDashboardReducer';
 import songReducer from './songReducer';
-import artistReducer from './artistReducer';   // ← MUST exist
+import artistReducer from './artistReducer';
 
 import { PLAYLIST } from "../data/index";
 import { PLAYPAUSE, CHANGETRACK } from "../actions/index";
@@ -17,7 +19,7 @@ const INITIAL_STATE = {
   isPlaying: false
 };
 
-export const playerReducer = (state = INITIAL_STATE, action) => {
+const playerReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case PLAYPAUSE:
       return { ...state, isPlaying: action.payload };
@@ -40,9 +42,11 @@ export const playerReducer = (state = INITIAL_STATE, action) => {
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  playlist: playlistReducer,
+  artistDashboard: artistDashboardReducer,
   player: playerReducer,
   songs: songReducer,
-  artist: artistReducer   // ← THIS LINE MUST EXIST
+  artist: artistReducer
 });
 
 export default rootReducer;
