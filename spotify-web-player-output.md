@@ -3,7 +3,7 @@
 ## 📊 Project Information
 
 - **Project Name**: `spotify-web-player`
-- **Generated On**: 2026-02-28 21:41:27 (Asia/Calcutta / GMT+06:30)
+- **Generated On**: 2026-03-01 06:35:57 (Asia/Calcutta / GMT+06:30)
 - **Total Files Processed**: 178
 - **Export Tool**: Easy Whole Project to Single Text File for LLMs v1.1.0
 - **Tool Author**: Jota / José Guilherme Pandolfi
@@ -36,8 +36,8 @@
 │   │   ├── 📄 artistDashboardActions.js (2.06 KB)
 │   │   ├── 📄 authActions.js (891 B)
 │   │   ├── 📄 index.js (285 B)
-│   │   ├── 📄 playlistActions.js (1.76 KB)
-│   │   ├── 📄 playlistsActions.js (1.76 KB)
+│   │   ├── 📄 playlistActions.js (1.81 KB)
+│   │   ├── 📄 playlistsActions.js (1.81 KB)
 │   │   └── 📄 songActions.js (1.33 KB)
 │   ├── 📁 component/
 │   │   ├── 📁 buttons/
@@ -188,7 +188,7 @@
 │   │   ├── 📄 liked-songs.js (1.34 KB)
 │   │   ├── 📄 liked-songs.module.css (359 B)
 │   │   ├── 📄 login.js (1.95 KB)
-│   │   ├── 📄 my-playlists.js (6.26 KB)
+│   │   ├── 📄 my-playlists.js (6.56 KB)
 │   │   ├── 📄 playlist.js (3.9 KB)
 │   │   ├── 📄 playlist.module.css (3.15 KB)
 │   │   ├── 📄 profile.js (4.29 KB)
@@ -201,7 +201,7 @@
 │   │   ├── 📄 artistReducer.js (1.58 KB)
 │   │   ├── 📄 authReducer.js (960 B)
 │   │   ├── 📄 index.js (1.72 KB)
-│   │   ├── 📄 playlistReducer.js (2.88 KB)
+│   │   ├── 📄 playlistReducer.js (3.26 KB)
 │   │   └── 📄 songReducer.js (1.92 KB)
 │   ├── 📁 style/
 │   │   ├── 📄 App.module.css (284 B)
@@ -816,15 +816,15 @@ export const changeTrack = (trackKey) => {
 ### <a id="📄-src-actions-playlistactions-js"></a>📄 `src/actions/playlistActions.js`
 
 **File Info:**
-- **Size**: 1.76 KB
+- **Size**: 1.81 KB
 - **Extension**: `.js`
 - **Language**: `javascript`
 - **Location**: `src/actions/playlistActions.js`
 - **Relative Path**: `src/actions`
 - **Created**: 2026-02-28 13:27:42 (Asia/Calcutta / GMT+06:30)
-- **Modified**: 2026-02-28 21:40:54 (Asia/Calcutta / GMT+06:30)
-- **MD5**: `86216ec443784425a85ace2495254fae`
-- **SHA256**: `c91bf10d18036476fdebd7d336e14354e0992497b910f3f12db4f8d8973541a8`
+- **Modified**: 2026-03-01 06:35:21 (Asia/Calcutta / GMT+06:30)
+- **MD5**: `d631b0c8df5959e51ef4898f15ecb8e7`
+- **SHA256**: `035ccbf4ce1d1300a9e70d3af782465e7e53aeb195478f9b38ce9e7289d6c5b3`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -843,47 +843,55 @@ export const SET_PLAYLIST_ERROR = "SET_PLAYLIST_ERROR";
 export const CLEAR_PLAYLIST_ERROR = "CLEAR_PLAYLIST_ERROR";
 
 // Action Creators
-export const createPlaylist = (playlistData) => {
-  return { type: CREATE_PLAYLIST, payload: playlistData };
-};
 
-export const deletePlaylist = (payload) => ({
+export const createPlaylist = (playlistData) => ({
+  type: CREATE_PLAYLIST,
+  payload: playlistData
+});
+
+export const deletePlaylist = ({ userId, playlistId }) => ({
   type: DELETE_PLAYLIST,
-  payload
+  payload: { userId, playlistId }
 });
 
-export const updatePlaylistVisibility = (playlistId, isPublic) => {
-  return { type: UPDATE_PLAYLIST_VISIBILITY, payload: { playlistId, isPublic } };
-};
+export const updatePlaylistVisibility = ({ userId, playlistId }) => ({
+  type: UPDATE_PLAYLIST_VISIBILITY,
+  payload: { userId, playlistId }
+});
 
-export const addSongToPlaylist = (payload) => ({
+export const addSongToPlaylist = ({ userId, playlistId, song }) => ({
   type: ADD_SONG_TO_PLAYLIST,
-  payload
+  payload: { userId, playlistId, song }
 });
 
-export const removeSongFromPlaylist = (playlistId, songId) => {
-  return { type: REMOVE_SONG_FROM_PLAYLIST, payload: { playlistId, songId } };
-};
+export const removeSongFromPlaylist = ({ userId, playlistId, songId }) => ({
+  type: REMOVE_SONG_FROM_PLAYLIST,
+  payload: { userId, playlistId, songId }
+});
 
-export const setPlaylists = (playlists) => {
-  return { type: SET_PLAYLISTS, payload: playlists };
-};
+export const setPlaylists = (playlists) => ({
+  type: SET_PLAYLISTS,
+  payload: playlists
+});
 
-export const setPublicPlaylists = (playlists) => {
-  return { type: SET_PUBLIC_PLAYLISTS, payload: playlists };
-};
+export const setPublicPlaylists = (playlists) => ({
+  type: SET_PUBLIC_PLAYLISTS,
+  payload: playlists
+});
 
-export const setPlaylistLoading = (isLoading) => {
-  return { type: SET_PLAYLIST_LOADING, payload: isLoading };
-};
+export const setPlaylistLoading = (isLoading) => ({
+  type: SET_PLAYLIST_LOADING,
+  payload: isLoading
+});
 
-export const setPlaylistError = (error) => {
-  return { type: SET_PLAYLIST_ERROR, payload: error };
-};
+export const setPlaylistError = (error) => ({
+  type: SET_PLAYLIST_ERROR,
+  payload: error
+});
 
-export const clearPlaylistError = () => {
-  return { type: CLEAR_PLAYLIST_ERROR };
-};
+export const clearPlaylistError = () => ({
+  type: CLEAR_PLAYLIST_ERROR
+});
 ```
 
 ---
@@ -891,15 +899,15 @@ export const clearPlaylistError = () => {
 ### <a id="📄-src-actions-playlistsactions-js"></a>📄 `src/actions/playlistsActions.js`
 
 **File Info:**
-- **Size**: 1.76 KB
+- **Size**: 1.81 KB
 - **Extension**: `.js`
 - **Language**: `javascript`
 - **Location**: `src/actions/playlistsActions.js`
 - **Relative Path**: `src/actions`
 - **Created**: 2026-02-28 13:27:42 (Asia/Calcutta / GMT+06:30)
-- **Modified**: 2026-02-28 21:41:01 (Asia/Calcutta / GMT+06:30)
-- **MD5**: `86216ec443784425a85ace2495254fae`
-- **SHA256**: `c91bf10d18036476fdebd7d336e14354e0992497b910f3f12db4f8d8973541a8`
+- **Modified**: 2026-03-01 06:35:25 (Asia/Calcutta / GMT+06:30)
+- **MD5**: `d631b0c8df5959e51ef4898f15ecb8e7`
+- **SHA256**: `035ccbf4ce1d1300a9e70d3af782465e7e53aeb195478f9b38ce9e7289d6c5b3`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -918,47 +926,55 @@ export const SET_PLAYLIST_ERROR = "SET_PLAYLIST_ERROR";
 export const CLEAR_PLAYLIST_ERROR = "CLEAR_PLAYLIST_ERROR";
 
 // Action Creators
-export const createPlaylist = (playlistData) => {
-  return { type: CREATE_PLAYLIST, payload: playlistData };
-};
 
-export const deletePlaylist = (payload) => ({
+export const createPlaylist = (playlistData) => ({
+  type: CREATE_PLAYLIST,
+  payload: playlistData
+});
+
+export const deletePlaylist = ({ userId, playlistId }) => ({
   type: DELETE_PLAYLIST,
-  payload
+  payload: { userId, playlistId }
 });
 
-export const updatePlaylistVisibility = (playlistId, isPublic) => {
-  return { type: UPDATE_PLAYLIST_VISIBILITY, payload: { playlistId, isPublic } };
-};
+export const updatePlaylistVisibility = ({ userId, playlistId }) => ({
+  type: UPDATE_PLAYLIST_VISIBILITY,
+  payload: { userId, playlistId }
+});
 
-export const addSongToPlaylist = (payload) => ({
+export const addSongToPlaylist = ({ userId, playlistId, song }) => ({
   type: ADD_SONG_TO_PLAYLIST,
-  payload
+  payload: { userId, playlistId, song }
 });
 
-export const removeSongFromPlaylist = (playlistId, songId) => {
-  return { type: REMOVE_SONG_FROM_PLAYLIST, payload: { playlistId, songId } };
-};
+export const removeSongFromPlaylist = ({ userId, playlistId, songId }) => ({
+  type: REMOVE_SONG_FROM_PLAYLIST,
+  payload: { userId, playlistId, songId }
+});
 
-export const setPlaylists = (playlists) => {
-  return { type: SET_PLAYLISTS, payload: playlists };
-};
+export const setPlaylists = (playlists) => ({
+  type: SET_PLAYLISTS,
+  payload: playlists
+});
 
-export const setPublicPlaylists = (playlists) => {
-  return { type: SET_PUBLIC_PLAYLISTS, payload: playlists };
-};
+export const setPublicPlaylists = (playlists) => ({
+  type: SET_PUBLIC_PLAYLISTS,
+  payload: playlists
+});
 
-export const setPlaylistLoading = (isLoading) => {
-  return { type: SET_PLAYLIST_LOADING, payload: isLoading };
-};
+export const setPlaylistLoading = (isLoading) => ({
+  type: SET_PLAYLIST_LOADING,
+  payload: isLoading
+});
 
-export const setPlaylistError = (error) => {
-  return { type: SET_PLAYLIST_ERROR, payload: error };
-};
+export const setPlaylistError = (error) => ({
+  type: SET_PLAYLIST_ERROR,
+  payload: error
+});
 
-export const clearPlaylistError = () => {
-  return { type: CLEAR_PLAYLIST_ERROR };
-};
+export const clearPlaylistError = () => ({
+  type: CLEAR_PLAYLIST_ERROR
+});
 ```
 
 ---
@@ -8853,15 +8869,15 @@ export default connect(mapStateToProps, { loginUser, setAuthError })(Login);
 ### <a id="📄-src-pages-my-playlists-js"></a>📄 `src/pages/my-playlists.js`
 
 **File Info:**
-- **Size**: 6.26 KB
+- **Size**: 6.56 KB
 - **Extension**: `.js`
 - **Language**: `javascript`
 - **Location**: `src/pages/my-playlists.js`
 - **Relative Path**: `src/pages`
 - **Created**: 2026-02-28 13:27:42 (Asia/Calcutta / GMT+06:30)
-- **Modified**: 2026-02-28 19:45:56 (Asia/Calcutta / GMT+06:30)
-- **MD5**: `caf3a219161cc9ed57f315cc3143a98e`
-- **SHA256**: `5cdd8b836443d42580b15f37a9b36b0f65325bab2c54fd222623cf1a765586f4`
+- **Modified**: 2026-03-01 06:35:56 (Asia/Calcutta / GMT+06:30)
+- **MD5**: `c942eb4c188a33b1a83a0638080bda7c`
+- **SHA256**: `f0f687f35d21e1154372b5726c0c801373a7059f16aaf63106d96046dcfe569d`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -8895,12 +8911,8 @@ function MyPlaylistsPage({
     setDeleteConfirmId(null);
   };
 
-  const handleToggleVisibility = (playlistId, currentVisibility) => {
-    updatePlaylistVisibility({
-      userId,
-      playlistId,
-      isPublic: !currentVisibility
-    });
+  const handleToggleVisibility = (playlistId) => {
+    updatePlaylistVisibility({ userId, playlistId });
   };
 
   const handleRemoveSong = (playlistId, songId) => {
@@ -8942,11 +8954,12 @@ function MyPlaylistsPage({
               <div key={playlist.id} className={styles.PlaylistCard}>
                 <div className={styles.CardHeader}>
                   <h3>{playlist.name}</h3>
+
                   <div className={styles.CardActions}>
                     <button
                       className={styles.VisibilityBtn}
                       onClick={() =>
-                        handleToggleVisibility(playlist.id, playlist.isPublic)
+                        handleToggleVisibility(playlist.id)
                       }
                       title={
                         playlist.isPublic
@@ -8968,11 +8981,14 @@ function MyPlaylistsPage({
                 </div>
 
                 {playlist.description && (
-                  <p className={styles.Description}>{playlist.description}</p>
+                  <p className={styles.Description}>
+                    {playlist.description}
+                  </p>
                 )}
 
                 <p className={styles.SongCount}>
-                  {playlist.songs.length} song{playlist.songs.length !== 1 ? 's' : ''}
+                  {playlist.songs.length} song
+                  {playlist.songs.length !== 1 ? 's' : ''}
                 </p>
 
                 {playlist.songs.length > 0 && (
@@ -8980,7 +8996,9 @@ function MyPlaylistsPage({
                     className={styles.ExpandBtn}
                     onClick={() =>
                       setExpandedPlaylistId(
-                        expandedPlaylistId === playlist.id ? null : playlist.id
+                        expandedPlaylistId === playlist.id
+                          ? null
+                          : playlist.id
                       )
                     }
                   >
@@ -8996,13 +9014,21 @@ function MyPlaylistsPage({
                       {playlist.songs.map((song, index) => (
                         <div key={song.id || index} className={styles.SongItem}>
                           <span className={styles.SongInfo}>
-                            <strong>{song.songName || song.title}</strong>
-                            <small>{song.songArtist || song.artist}</small>
+                            <strong>
+                              {song.songName || song.title}
+                            </strong>
+                            <small>
+                              {song.songArtist || song.artist}
+                            </small>
                           </span>
+
                           <button
                             className={styles.RemoveBtn}
                             onClick={() =>
-                              handleRemoveSong(playlist.id, song.id)
+                              handleRemoveSong(
+                                playlist.id,
+                                song.id
+                              )
                             }
                           >
                             ✕
@@ -9023,7 +9049,9 @@ function MyPlaylistsPage({
                         Cancel
                       </button>
                       <button
-                        onClick={() => handleDeletePlaylist(playlist.id)}
+                        onClick={() =>
+                          handleDeletePlaylist(playlist.id)
+                        }
                         className={styles.ConfirmBtn}
                       >
                         Delete
@@ -9047,8 +9075,10 @@ function MyPlaylistsPage({
 
 const mapStateToProps = (state) => {
   const userId = state.auth.user?.id;
+
   return {
-    myPlaylists: state.playlist.playlistsByUser[userId] || [],
+    myPlaylists:
+      state.playlist.playlistsByUser[userId] || [],
     userId
   };
 };
@@ -10241,15 +10271,15 @@ export default rootReducer;
 ### <a id="📄-src-reducers-playlistreducer-js"></a>📄 `src/reducers/playlistReducer.js`
 
 **File Info:**
-- **Size**: 2.88 KB
+- **Size**: 3.26 KB
 - **Extension**: `.js`
 - **Language**: `javascript`
 - **Location**: `src/reducers/playlistReducer.js`
 - **Relative Path**: `src/reducers`
 - **Created**: 2026-02-28 13:27:42 (Asia/Calcutta / GMT+06:30)
-- **Modified**: 2026-02-28 19:42:02 (Asia/Calcutta / GMT+06:30)
-- **MD5**: `16c5ea915bbe671be1253e13a913b708`
-- **SHA256**: `fc3bae8e43d70f9533820f8db660913372ddbaceb636dcc6e4df76378b107993`
+- **Modified**: 2026-03-01 06:32:22 (Asia/Calcutta / GMT+06:30)
+- **MD5**: `4d78e25fede498a130827bc1fbfec763`
+- **SHA256**: `ce02a08390dc4c6fbdfeacb337aa8ede4bb39b157e61f06c99fad4ab1529fbcc`
 - **Encoding**: UTF-8
 
 **File code content:**
@@ -10313,7 +10343,25 @@ export const playlistReducer = (state = INITIAL_STATE, action) => {
 
       return { ...state, playlistsByUser: updated };
     }
+    case UPDATE_PLAYLIST_VISIBILITY: {
+  const { userId, playlistId } = action.payload;
 
+  const updated = {
+    ...state.playlistsByUser,
+    [userId]: state.playlistsByUser[userId].map(p =>
+      p.id === playlistId
+        ? { ...p, isPublic: !p.isPublic }
+        : p
+    )
+  };
+
+  saveToStorage(updated);
+
+  return {
+    ...state,
+    playlistsByUser: updated
+  };
+}
     case DELETE_PLAYLIST: {
       const { userId, playlistId } = action.payload;
 

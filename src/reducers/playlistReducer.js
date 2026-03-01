@@ -56,7 +56,25 @@ export const playlistReducer = (state = INITIAL_STATE, action) => {
 
       return { ...state, playlistsByUser: updated };
     }
+    case UPDATE_PLAYLIST_VISIBILITY: {
+  const { userId, playlistId } = action.payload;
 
+  const updated = {
+    ...state.playlistsByUser,
+    [userId]: state.playlistsByUser[userId].map(p =>
+      p.id === playlistId
+        ? { ...p, isPublic: !p.isPublic }
+        : p
+    )
+  };
+
+  saveToStorage(updated);
+
+  return {
+    ...state,
+    playlistsByUser: updated
+  };
+}
     case DELETE_PLAYLIST: {
       const { userId, playlistId } = action.payload;
 

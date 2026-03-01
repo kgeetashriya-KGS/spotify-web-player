@@ -26,12 +26,8 @@ function MyPlaylistsPage({
     setDeleteConfirmId(null);
   };
 
-  const handleToggleVisibility = (playlistId, currentVisibility) => {
-    updatePlaylistVisibility({
-      userId,
-      playlistId,
-      isPublic: !currentVisibility
-    });
+  const handleToggleVisibility = (playlistId) => {
+    updatePlaylistVisibility({ userId, playlistId });
   };
 
   const handleRemoveSong = (playlistId, songId) => {
@@ -73,11 +69,12 @@ function MyPlaylistsPage({
               <div key={playlist.id} className={styles.PlaylistCard}>
                 <div className={styles.CardHeader}>
                   <h3>{playlist.name}</h3>
+
                   <div className={styles.CardActions}>
                     <button
                       className={styles.VisibilityBtn}
                       onClick={() =>
-                        handleToggleVisibility(playlist.id, playlist.isPublic)
+                        handleToggleVisibility(playlist.id)
                       }
                       title={
                         playlist.isPublic
@@ -99,11 +96,14 @@ function MyPlaylistsPage({
                 </div>
 
                 {playlist.description && (
-                  <p className={styles.Description}>{playlist.description}</p>
+                  <p className={styles.Description}>
+                    {playlist.description}
+                  </p>
                 )}
 
                 <p className={styles.SongCount}>
-                  {playlist.songs.length} song{playlist.songs.length !== 1 ? 's' : ''}
+                  {playlist.songs.length} song
+                  {playlist.songs.length !== 1 ? 's' : ''}
                 </p>
 
                 {playlist.songs.length > 0 && (
@@ -111,7 +111,9 @@ function MyPlaylistsPage({
                     className={styles.ExpandBtn}
                     onClick={() =>
                       setExpandedPlaylistId(
-                        expandedPlaylistId === playlist.id ? null : playlist.id
+                        expandedPlaylistId === playlist.id
+                          ? null
+                          : playlist.id
                       )
                     }
                   >
@@ -127,13 +129,21 @@ function MyPlaylistsPage({
                       {playlist.songs.map((song, index) => (
                         <div key={song.id || index} className={styles.SongItem}>
                           <span className={styles.SongInfo}>
-                            <strong>{song.songName || song.title}</strong>
-                            <small>{song.songArtist || song.artist}</small>
+                            <strong>
+                              {song.songName || song.title}
+                            </strong>
+                            <small>
+                              {song.songArtist || song.artist}
+                            </small>
                           </span>
+
                           <button
                             className={styles.RemoveBtn}
                             onClick={() =>
-                              handleRemoveSong(playlist.id, song.id)
+                              handleRemoveSong(
+                                playlist.id,
+                                song.id
+                              )
                             }
                           >
                             ✕
@@ -154,7 +164,9 @@ function MyPlaylistsPage({
                         Cancel
                       </button>
                       <button
-                        onClick={() => handleDeletePlaylist(playlist.id)}
+                        onClick={() =>
+                          handleDeletePlaylist(playlist.id)
+                        }
                         className={styles.ConfirmBtn}
                       >
                         Delete
@@ -178,8 +190,10 @@ function MyPlaylistsPage({
 
 const mapStateToProps = (state) => {
   const userId = state.auth.user?.id;
+
   return {
-    myPlaylists: state.playlist.playlistsByUser[userId] || [],
+    myPlaylists:
+      state.playlist.playlistsByUser[userId] || [],
     userId
   };
 };

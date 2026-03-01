@@ -11,44 +11,52 @@ export const SET_PLAYLIST_ERROR = "SET_PLAYLIST_ERROR";
 export const CLEAR_PLAYLIST_ERROR = "CLEAR_PLAYLIST_ERROR";
 
 // Action Creators
-export const createPlaylist = (playlistData) => {
-  return { type: CREATE_PLAYLIST, payload: playlistData };
-};
 
-export const deletePlaylist = (payload) => ({
+export const createPlaylist = (playlistData) => ({
+  type: CREATE_PLAYLIST,
+  payload: playlistData
+});
+
+export const deletePlaylist = ({ userId, playlistId }) => ({
   type: DELETE_PLAYLIST,
-  payload
+  payload: { userId, playlistId }
 });
 
-export const updatePlaylistVisibility = (playlistId, isPublic) => {
-  return { type: UPDATE_PLAYLIST_VISIBILITY, payload: { playlistId, isPublic } };
-};
+export const updatePlaylistVisibility = ({ userId, playlistId }) => ({
+  type: UPDATE_PLAYLIST_VISIBILITY,
+  payload: { userId, playlistId }
+});
 
-export const addSongToPlaylist = (payload) => ({
+export const addSongToPlaylist = ({ userId, playlistId, song }) => ({
   type: ADD_SONG_TO_PLAYLIST,
-  payload
+  payload: { userId, playlistId, song }
 });
 
-export const removeSongFromPlaylist = (playlistId, songId) => {
-  return { type: REMOVE_SONG_FROM_PLAYLIST, payload: { playlistId, songId } };
-};
+export const removeSongFromPlaylist = ({ userId, playlistId, songId }) => ({
+  type: REMOVE_SONG_FROM_PLAYLIST,
+  payload: { userId, playlistId, songId }
+});
 
-export const setPlaylists = (playlists) => {
-  return { type: SET_PLAYLISTS, payload: playlists };
-};
+export const setPlaylists = (playlists) => ({
+  type: SET_PLAYLISTS,
+  payload: playlists
+});
 
-export const setPublicPlaylists = (playlists) => {
-  return { type: SET_PUBLIC_PLAYLISTS, payload: playlists };
-};
+export const setPublicPlaylists = (playlists) => ({
+  type: SET_PUBLIC_PLAYLISTS,
+  payload: playlists
+});
 
-export const setPlaylistLoading = (isLoading) => {
-  return { type: SET_PLAYLIST_LOADING, payload: isLoading };
-};
+export const setPlaylistLoading = (isLoading) => ({
+  type: SET_PLAYLIST_LOADING,
+  payload: isLoading
+});
 
-export const setPlaylistError = (error) => {
-  return { type: SET_PLAYLIST_ERROR, payload: error };
-};
+export const setPlaylistError = (error) => ({
+  type: SET_PLAYLIST_ERROR,
+  payload: error
+});
 
-export const clearPlaylistError = () => {
-  return { type: CLEAR_PLAYLIST_ERROR };
-};
+export const clearPlaylistError = () => ({
+  type: CLEAR_PLAYLIST_ERROR
+});
